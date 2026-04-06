@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="theme-color" content="#0F172A" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- SEO -->
+    <title>PetFinder AI — Subí la foto, nosotros la buscamos</title>
+    <meta name="description" content="Te ayudamos a encontrar tu mascota en 24-72 horas. IA que rastrea en 10+ redes sociales, WhatsApp Bot vecinal y alertas geolocalizadas." />
+    <meta name="keywords" content="mascota perdida, perro perdido, gato perdido, encontrar mascota, IA mascotas, pet finder, PetFinder AI" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="PetFinder AI — Subí la foto, nosotros la buscamos" />
+    <meta property="og:description" content="IA que rastrea en 10+ redes sociales. WhatsApp Bot, alertas geolocalizadas y difusión inteligente." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PetFinder AI" />
+    <meta name="twitter:description" content="Subí la foto, nosotros la buscamos. IA + WhatsApp Bot + Alertas geolocalizadas." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237C3AED'%3E%3Cellipse cx='8' cy='6' rx='2.5' ry='3'/%3E%3Cellipse cx='16' cy='6' rx='2.5' ry='3'/%3E%3Cellipse cx='4.5' cy='12' rx='2' ry='2.5'/%3E%3Cellipse cx='19.5' cy='12' rx='2' ry='2.5'/%3E%3Cpath d='M7 16c0-2 2.5-4 5-4s5 2 5 4-1.5 4-5 4-5-2-5-4z'/%3E%3C/svg%3E" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+  </head>
+  <body style="margin:0;padding:0;background:#0F172A">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+    </script>
+  </body>
+</html>
