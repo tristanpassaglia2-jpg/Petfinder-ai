@@ -1,4 +1,4 @@
-src/App.jsximport { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 /* ══════════════════════════════════════════════════════════════════
    PetFinder AI v3 — Módulo 2: IA Real con Claude Vision API
