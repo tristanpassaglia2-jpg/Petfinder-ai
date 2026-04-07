@@ -29,7 +29,7 @@ const ClaudeAI = {
   // Analyze a pet photo using Claude Vision
   async analyzePhoto(base64Image, mediaType, userDescription = "") {
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/analize-photo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -86,7 +86,7 @@ Return ONLY the JSON object.`
   // Compare two pets using Claude
   async comparePets(pet1Features, pet2Features, pet1Desc, pet2Desc) {
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/compare-pets", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -127,7 +127,7 @@ Return:
   // AI Chat assistant for search help
   async chatAssistant(message, context = "") {
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/vet-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -167,7 +167,7 @@ Return:
     ];
 
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/faceid-tracker", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -908,7 +908,7 @@ export default function App() {
     setVetMessages(p=>[...p,{from:"user",text:msg,time:new Date().toLocaleTimeString()}]);
     setVetLoading(true);
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/vet-chat", {
         method:"POST", headers:{"Content-Type":"application/json"},
         body: JSON.stringify({
           model:"claude-sonnet-4-20250514", max_tokens:1000,
