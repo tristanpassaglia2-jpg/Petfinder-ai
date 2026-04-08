@@ -1026,25 +1026,25 @@ export default function App() {
           </div>
         </div>
         {/* Section nav bar */}
-        <div style={{maxWidth:1100,margin:"6px auto 0",display:"flex",gap:4,overflowX:"auto",paddingBottom:2}}>
+        <div style={{maxWidth:1100,margin:"6px auto 0",display:"flex",gap:6,overflowX:"auto",paddingBottom:2}}>
           {[
-            {k:"club",l:"Club us$5",i:<$.Paw s={12}/>},
-            {k:"home",l:"Perdidos",i:<$.Search s={12}/>},
-            {k:"vet",l:"Vet IA",i:<$.AI s={12}/>},
-            {k:"petid",l:"ID + QR",i:<$.Scan s={12}/>},
-            {k:"petfit",l:"PetFit",i:<$.Heart s={12}/>},
-            {k:"petmatch",l:"PetMatch",i:<$.Sparkle s={12}/>},
+            {k:"club",l:"Club us$5",i:<$.Paw s={16}/>},
+            {k:"home",l:"Perdidos",i:<$.Search s={16}/>},
+            {k:"vet",l:"Vet IA",i:<$.AI s={16}/>},
+            {k:"petid",l:"ID + QR",i:<$.Scan s={16}/>},
+            {k:"petfit",l:"PetFit",i:<$.Heart s={16}/>},
+            {k:"petmatch",l:"PetMatch",i:<$.Sparkle s={16}/>},
 
-            {k:"adoption",l:"Adopción",i:<$.Heart s={12}/>},
-            {k:"foster",l:"Guarda",i:<$.Shield s={12}/>},
-            {k:"market",l:"Servicios",i:<$.Star s={12}/>},
-            {k:"shield",l:"Shield",i:<$.Shield s={12}/>},
-            {k:"community",l:"Comunidad",i:<$.Paw s={12}/>},
+            {k:"adoption",l:"Adopción",i:<$.Heart s={16}/>},
+            {k:"foster",l:"Guarda",i:<$.Shield s={16}/>},
+            {k:"market",l:"Servicios",i:<$.Star s={16}/>},
+            {k:"shield",l:"Shield",i:<$.Shield s={16}/>},
+            {k:"community",l:"Comunidad",i:<$.Paw s={16}/>},
           ].map(n=>(
             <button key={n.k} onClick={()=>{setPage(n.k);setSelectedPet(null);}} style={{
-              padding:"5px 12px",borderRadius:8,border:"none",cursor:"pointer",
-              background:page===n.k?"#1C1917":"transparent",color:page===n.k?"#fff":"#A8A29E",
-              fontWeight:600,fontSize:11,fontFamily:"inherit",transition:"all .2s",
+              padding:"8px 16px",borderRadius:10,border:"none",cursor:"pointer",
+              background:page===n.k?"#1C1917":"transparent",color:page===n.k?"#FFFFFF":"#475569",
+              fontWeight:700,fontSize:15,fontFamily:"inherit",transition:"all .2s",
               display:"flex",alignItems:"center",gap:4,whiteSpace:"nowrap",flexShrink:0,
             }}>{n.i}{n.l}</button>
           ))}
