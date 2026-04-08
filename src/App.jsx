@@ -1059,7 +1059,7 @@ export default function App() {
           <section style={{padding:0,background:"linear-gradient(180deg,#0F172A 0%,#1E293B 55%,#0F172A 100%)",color:"#fff",position:"relative",overflow:"hidden"}}>
             <div style={{position:"absolute",inset:0,opacity:.12}}>{Array.from({length:18}).map((_,i)=>(<div key={i} style={{position:"absolute",width:4,height:4,borderRadius:2,background:"#7C3AED",left:`${(i*17)%100}%`,top:`${(i*23+8)%100}%`,animation:`pulse ${2+i%3}s ${i*.3}s infinite`}}/>))}</div>
 
-            <div style={{maxWidth:540,margin:"0 auto",padding:"40px 16px 32px",textAlign:"center",position:"relative",zIndex:1}}>
+            <div style={{maxWidth:720,margin:"0 auto",padding:"40px 16px 32px",textAlign:"center",position:"relative",zIndex:1}}>
               <div style={{display:"inline-flex",alignItems:"center",gap:6,background:"rgba(124,58,237,.15)",border:"1px solid rgba(124,58,237,.3)",padding:"6px 16px",borderRadius:100,marginBottom:18}}>
                 <div style={{width:8,height:8,borderRadius:4,background:"#4ADE80",boxShadow:"0 0 8px #4ADE80",animation:"pulse 1.5s infinite"}}/>
                 <span style={{fontSize:10,fontWeight:700,letterSpacing:".08em",color:"#C4B5FD"}}>RASTREO IA ACTIVO · 10+ REDES · 24/7</span>
@@ -1075,17 +1075,17 @@ export default function App() {
               </p>
 
               {/* Main CTA */}
-              <div style={{background:"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.1)",borderRadius:20,padding:22,maxWidth:420,margin:"0 auto 16px",backdropFilter:"blur(10px)"}}>
-                <div style={{width:56,height:56,borderRadius:16,background:"linear-gradient(135deg,#7C3AED,#A78BFA)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 14px",boxShadow:"0 8px 30px rgba(124,58,237,.3)"}}>
+              <div style={{background:"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.1)",borderRadius:24,padding:28,maxWidth:620,margin:"0 auto 18px",backdropFilter:"blur(10px)"}}>
+                <div style={{width:74,height:74,borderRadius:20,background:"linear-gradient(135deg,#7C3AED,#A78BFA)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 14px",boxShadow:"0 8px 30px rgba(124,58,237,.3)"}}>
                   <$.Scan s={28} c="#fff"/>
                 </div>
-                <div style={{fontWeight:800,fontSize:20,marginBottom:4}}>Subí la foto, nosotros la buscamos</div>
-                <div style={{fontSize:12,color:"#94A3B8",marginBottom:16}}>Face ID Tracker + Reportes WhatsApp + Alertas geolocalizadas</div>
-                <button className="bp" style={{width:"100%",justifyContent:"center",padding:"15px",fontSize:16,background:"linear-gradient(135deg,#7C3AED,#A78BFA)",borderRadius:14,boxShadow:"0 8px 30px rgba(124,58,237,.4)"}}
+                <div style={{fontWeight:800,fontSize:26,marginBottom:8}}>Subí la foto, nosotros la buscamos</div>
+                <div style={{fontSize:15,color:"#94A3B8",marginBottom:20}}>Face ID Tracker + Reportes WhatsApp + Alertas geolocalizadas</div>
+                <button className="bp" style={{width:"100%",justifyContent:"center",padding:"18px",fontSize:19,background:"linear-gradient(135deg,#7C3AED,#A78BFA)",borderRadius:14,boxShadow:"0 8px 30px rgba(124,58,237,.4)"}}
                   onClick={()=>{if(requireAuth("activar rastreo"))setModal("register");}}>
-                  <$.Cam s={18}/> Subir foto y activar rastreo
+                  <$.Cam s={22}/> Subir foto y activar rastreo
                 </button>
-                <div style={{fontSize:10,color:"#64748B",marginTop:10}}>Subir es gratis · Resultados desde US$20/semana</div>
+                <div style={{fontSize:13,color:"#64748B",marginTop:12}}>Subir es gratis · Resultados desde US$20/semana</div>
               </div>
 
               <button style={{background:"rgba(255,255,255,.08)",border:"1px solid rgba(255,255,255,.15)",color:"#E2E8F0",borderRadius:12,padding:"10px 22px",fontWeight:600,fontSize:13,cursor:"pointer",fontFamily:"inherit",display:"inline-flex",alignItems:"center",gap:6,transition:"all .2s"}}
