@@ -1028,7 +1028,7 @@ export default function App() {
         {/* Section nav bar */}
         <div style={{maxWidth:1100,margin:"6px auto 0",display:"flex",gap:4,overflowX:"auto",paddingBottom:2}}>
           {[
-            {k:"club",l:"Club US$3",i:<$.Paw s={12}/>},
+            {k:"club",l:"Club us$5",i:<$.Paw s={12}/>},
             {k:"home",l:"Perdidos",i:<$.Search s={12}/>},
             {k:"vet",l:"Vet IA",i:<$.AI s={12}/>},
             {k:"petid",l:"ID + QR",i:<$.Scan s={12}/>},
@@ -1172,9 +1172,9 @@ export default function App() {
                 </div>
                 <div>
                   <div style={{fontWeight:800,fontSize:17,color:"#92400E",letterSpacing:"-.02em"}}>PetFinder Club</div>
-                  <div style={{fontSize:12,color:"#A16207",lineHeight:1.4,marginTop:2}}>Hacé socio a tu mascota por US$3/mes. Vet IA, QR, ficha médica y todo listo si se pierde.</div>
+                  <div style={{fontSize:12,color:"#A16207",lineHeight:1.4,marginTop:2}}>Hacé socio a tu mascota por us$5/mes. Vet IA, QR, ficha médica y todo listo si se pierde.</div>
                   <div style={{display:"flex",alignItems:"center",gap:6,marginTop:8}}>
-                    <span style={{background:"#E8590C",color:"#fff",padding:"5px 14px",borderRadius:8,fontSize:12,fontWeight:700}}>US$3/mes</span>
+                    <span style={{background:"#E8590C",color:"#fff",padding:"5px 14px",borderRadius:8,fontSize:12,fontWeight:700}}>us$5/mes</span>
                     <span style={{fontSize:10,color:"#92400E",fontWeight:600}}>Menos que un café ☕</span>
                   </div>
                 </div>
@@ -1729,7 +1729,7 @@ export default function App() {
         </div>
       )}
 
-      {/* ═══ PETFINDER CLUB — US$3/mes ═══ */}
+      {/* ═══ PETFINDER CLUB — us$5/mes ═══ */}
       {!selectedPet && page==="club" && (
         <div style={{animation:"fadeIn .5s",maxWidth:600,margin:"0 auto",padding:"0 14px"}}>
           {/* Hero */}
@@ -1745,7 +1745,7 @@ export default function App() {
               Hacé socio a tu mascota. Por menos que un café al mes, tiene acceso a todo un ecosistema de beneficios.
             </p>
             <div style={{display:"flex",alignItems:"baseline",justifyContent:"center",gap:3}}>
-              <span style={{fontSize:42,fontWeight:800,color:"#E8590C"}}>US$3</span>
+              <span style={{fontSize:42,fontWeight:800,color:"#E8590C"}}>us$5</span>
               <span style={{fontSize:15,color:"#A8A29E"}}>/mes</span>
             </div>
             <div style={{fontSize:12,color:"#78716C",marginTop:4}}>Cancelá cuando quieras · Sin permanencia</div>
@@ -1755,7 +1755,7 @@ export default function App() {
           <section style={{padding:"20px 0"}}>
             <div style={{background:"#fff",borderRadius:20,border:"2px solid #F59E0B30",overflow:"hidden"}}>
               <div style={{background:"linear-gradient(135deg,#F59E0B,#E8590C)",padding:"16px 18px",color:"#fff"}}>
-                <div style={{fontWeight:800,fontSize:16}}>Todo esto por US$3/mes</div>
+                <div style={{fontWeight:800,fontSize:16}}>Todo esto por us$5/mes</div>
                 <div style={{fontSize:11,opacity:.85,marginTop:2}}>El plan más accesible para cuidar a tu mascota</div>
               </div>
               <div style={{padding:18}}>
@@ -1786,7 +1786,7 @@ export default function App() {
                   <div style={{fontSize:22}}>🔍</div>
                   <div>
                     <div style={{fontWeight:800,fontSize:13,color:"#7C3AED"}}>BONUS: Tu mascota ya está en el sistema</div>
-                    <div style={{fontSize:11,color:"#78716C",lineHeight:1.5,marginTop:2}}>Si algún día se pierde, la foto ya está cargada, la IA ya analizó sus rasgos y el Face ID Tracker se activa al instante. No perdés ni un segundo. Este solo beneficio vale más que los US$3.</div>
+                    <div style={{fontSize:11,color:"#78716C",lineHeight:1.5,marginTop:2}}>Si algún día se pierde, la foto ya está cargada, la IA ya analizó sus rasgos y el Face ID Tracker se activa al instante. No perdés ni un segundo. Este solo beneficio vale más que los us$5.</div>
                   </div>
                 </div>
               </div>
@@ -1838,14 +1838,14 @@ export default function App() {
           <section style={{padding:"0 0 16px"}}>
             <button className="bp" style={{width:"100%",justifyContent:"center",padding:"16px",fontSize:16,background:"linear-gradient(135deg,#F59E0B,#E8590C)",borderRadius:16}}
               onClick={()=>{if(requireAuth("unirte al Club"))setModal("premium");}}>
-              <$.Paw s={18}/> Hacé socio a tu mascota — US$3/mes
+              <$.Paw s={18}/> Hacé socio a tu mascota — us$5/mes
             </button>
           </section>
 
           {/* Comparison: why Club */}
           <section style={{padding:"0 0 16px"}}>
             <div style={{background:"linear-gradient(135deg,#0F172A,#1E293B)",borderRadius:18,padding:18}}>
-              <div style={{fontSize:10,fontWeight:700,color:"#FBBF24",letterSpacing:".06em",marginBottom:14}}>¿POR QUÉ US$3?</div>
+              <div style={{fontSize:10,fontWeight:700,color:"#FBBF24",letterSpacing:".06em",marginBottom:14}}>¿POR QUÉ us$5?</div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
                 <div>
                   <div style={{fontSize:11,fontWeight:700,color:"#F87171",marginBottom:8}}>❌ SIN CLUB</div>
@@ -1854,7 +1854,7 @@ export default function App() {
                   ))}
                 </div>
                 <div>
-                  <div style={{fontSize:11,fontWeight:700,color:"#4ADE80",marginBottom:8}}>✓ CON CLUB US$3</div>
+                  <div style={{fontSize:11,fontWeight:700,color:"#4ADE80",marginBottom:8}}>✓ CON CLUB us$5</div>
                   {["Foto + perfil ya cargados","Face ID listo al instante","Ficha médica completa","Recordatorios automáticos","Todo preparado si pasa algo"].map((t,i)=>(
                     <div key={i} style={{fontSize:10,color:"#E2E8F0",marginBottom:4}}>• {t}</div>
                   ))}
@@ -2743,7 +2743,7 @@ export default function App() {
           <div style={{display:"flex",flexDirection:"column",gap:1}}>
             {[
               {l:"Inicio",i:<$.Paw s={16}/>,fn:()=>{setSelectedPet(null);setPage("home");setModal(null);}},
-              {l:"Club US$3/mes",i:<$.Paw s={16} c="#F59E0B"/>,fn:()=>{setPage("club");setSelectedPet(null);setModal(null);}},
+              {l:"Club us$5/mes",i:<$.Paw s={16} c="#F59E0B"/>,fn:()=>{setPage("club");setSelectedPet(null);setModal(null);}},
               {l:"Perdí mi mascota",i:<$.Heart s={16}/>,fn:()=>setModal("register")},
               {l:"Encontré una mascota",i:<$.Cam s={16}/>,fn:()=>setModal("found")},
               {l:"Adopción",i:<$.Heart s={16} c="#EF4444"/>,fn:()=>{setPage("adoption");setSelectedPet(null);setModal(null);}},
