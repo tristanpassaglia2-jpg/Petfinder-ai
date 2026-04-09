@@ -1,3 +1,5 @@
+
+
 import { useState, useEffect, useRef, useCallback } from "react";
 
 /* ══════════════════════════════════════════════════════════════════
@@ -988,6 +990,8 @@ export default function App() {
   return (
     <div style={{minHeight:"100vh",fontFamily:"'Outfit',sans-serif",background:"#FAFAF9",color:"#1C1917"}}>
       <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
       <style>{CSS}</style>
 
       {notif&&<div className={`nt ${notif.t}`}>{notif.m}</div>}
@@ -2506,7 +2510,22 @@ export default function App() {
           </div>
           <div style={{background:"#FAFAF9",borderRadius:12,padding:12,marginBottom:14}}>
             <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}><$.Phone s={14} c="#059669"/><span style={{fontSize:13,fontWeight:600}}>{contactPet.ownerPhone||contactPet.finderPhone}</span></div>
-            <div style={{display:"flex",alignItems:"center",gap:8}}><$.Pin s={14} c="#2563EB"/><span style={{fontSize:12}}>{contactPet.location?.address}</span></div>
+            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}><$.Pin s={14} c="#2563EB"/><span style={{fontSize:12}}>{contactPet.location?.address}</span></div>
+            {/* WhatsApp Direct Button */}
+            <button onClick={()=>{
+              const phone=(contactPet.ownerPhone||contactPet.finderPhone||"").replace(/[^0-9+]/g,"").replace(/^\+/,"");
+              const petName=contactPet.name||"mascota";
+              const msg=encodeURIComponent(`Hola! Te escribo desde PetFinder AI por ${contactPet.status==="lost"?`tu mascota perdida "${petName}"`:`la mascota que encontraste`}. ${contactPet.status==="lost"?"Creo que la vi/encontré!":"¿Podría ser mi mascota?"}`);
+              window.open(`https://wa.me/${phone}?text=${msg}`,"_blank");
+            }} style={{
+              width:"100%",padding:"12px 16px",borderRadius:10,border:"none",
+              background:"linear-gradient(135deg,#25D366,#128C7E)",color:"#fff",
+              cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:8,
+              fontFamily:"inherit",fontWeight:700,fontSize:13,transition:"all .2s",
+            }}>
+              <svg width={18} height={18} viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Abrir WhatsApp directo
+            </button>
           </div>
           <div style={{fontSize:11,fontWeight:700,color:"#A8A29E",marginBottom:8,letterSpacing:".05em"}}>CHAT</div>
           <div style={{background:"#FAFAF9",borderRadius:12,padding:12,minHeight:160,maxHeight:240,overflowY:"auto",display:"flex",flexDirection:"column",gap:6,marginBottom:12}}>
@@ -2780,26 +2799,170 @@ function Modal({children,onClose}){
   return <div className="mo" onClick={onClose}><div className="mc" onClick={e=>e.stopPropagation()}><button onClick={onClose} style={{position:"absolute",top:12,right:12,background:"none",border:"none",cursor:"pointer",padding:3,zIndex:1}}><$.X s={20} c="#A8A29E"/></button>{children}</div></div>;
 }
 
+// ═══════════════════════════════════════════════════════════
+// INTERACTIVE MAP WITH RADIUS (Leaflet)
+// ═══════════════════════════════════════════════════════════
+function MapRadius({ lat, lng, radiusKm, onLocationChange, exposureTier }) {
+  const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+  const markerRef = useRef(null);
+  const circleRef = useRef(null);
+  const tierColor = exposureTier==="platinum"?"#7C3AED":exposureTier==="oro"?"#D97706":"#94A3B8";
+
+  useEffect(()=>{
+    if(!mapRef.current||typeof window==="undefined"||!window.L) return;
+    // Init map once
+    if(!mapInstanceRef.current){
+      const map = window.L.map(mapRef.current,{
+        center:[lat,lng],zoom:13,zoomControl:true,
+        attributionControl:false,
+      });
+      window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+        maxZoom:18,
+      }).addTo(map);
+      // Custom paw icon
+      const pawIcon = window.L.divIcon({
+        html:`<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#E8590C,#DC2626);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(232,89,12,.5);border:3px solid #fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><ellipse cx="8" cy="6" rx="2.5" ry="3"/><ellipse cx="16" cy="6" rx="2.5" ry="3"/><ellipse cx="4.5" cy="12" rx="2" ry="2.5"/><ellipse cx="19.5" cy="12" rx="2" ry="2.5"/><path d="M7 16c0-2 2.5-4 5-4s5 2 5 4-1.5 4-5 4-5-2-5-4z"/></svg></div>`,
+        iconSize:[36,36],iconAnchor:[18,18],className:"",
+      });
+      const marker = window.L.marker([lat,lng],{icon:pawIcon,draggable:true}).addTo(map);
+      const circle = window.L.circle([lat,lng],{
+        radius:radiusKm*1000,color:tierColor,fillColor:tierColor,
+        fillOpacity:0.12,weight:2,dashArray:"8,6",
+      }).addTo(map);
+
+      // Drag marker → update location
+      marker.on("dragend",async function(){
+        const pos=marker.getLatLng();
+        circle.setLatLng(pos);
+        // Reverse geocode
+        try{
+          const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.lat}&lon=${pos.lng}&format=json&accept-language=es`);
+          const data=await r.json();
+          const addr=data.address;
+          const name=[addr.neighbourhood||addr.suburb||"",addr.city||addr.town||addr.village||"",addr.state||""].filter(Boolean).join(", ");
+          onLocationChange(pos.lat,pos.lng,name);
+        }catch{onLocationChange(pos.lat,pos.lng,"");}
+      });
+
+      // Click map → move marker
+      map.on("click",async function(e){
+        marker.setLatLng(e.latlng);
+        circle.setLatLng(e.latlng);
+        try{
+          const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&format=json&accept-language=es`);
+          const data=await r.json();
+          const addr=data.address;
+          const name=[addr.neighbourhood||addr.suburb||"",addr.city||addr.town||addr.village||"",addr.state||""].filter(Boolean).join(", ");
+          onLocationChange(e.latlng.lat,e.latlng.lng,name);
+        }catch{onLocationChange(e.latlng.lat,e.latlng.lng,"");}
+      });
+
+      mapInstanceRef.current=map;markerRef.current=marker;circleRef.current=circle;
+      // Fix map container size after modal animation
+      setTimeout(()=>map.invalidateSize(),400);
+    }
+  },[]);
+
+  // Update circle when radius or tier changes
+  useEffect(()=>{
+    if(circleRef.current){
+      circleRef.current.setRadius(radiusKm*1000);
+      circleRef.current.setStyle({color:tierColor,fillColor:tierColor});
+    }
+    if(mapInstanceRef.current&&markerRef.current){
+      const z=radiusKm<=1?15:radiusKm<=3?14:radiusKm<=5?13:radiusKm<=10?12:radiusKm<=20?11:9;
+      mapInstanceRef.current.setView(markerRef.current.getLatLng(),z,{animate:true});
+    }
+  },[radiusKm,tierColor]);
+
+  // Update marker position when GPS changes externally
+  useEffect(()=>{
+    if(markerRef.current&&circleRef.current&&mapInstanceRef.current){
+      const pos=markerRef.current.getLatLng();
+      if(Math.abs(pos.lat-lat)>0.0001||Math.abs(pos.lng-lng)>0.0001){
+        markerRef.current.setLatLng([lat,lng]);
+        circleRef.current.setLatLng([lat,lng]);
+        mapInstanceRef.current.setView([lat,lng],13,{animate:true});
+      }
+    }
+  },[lat,lng]);
+
+  return (
+    <div style={{position:"relative"}}>
+      <div ref={mapRef} style={{width:"100%",height:220,borderRadius:14,overflow:"hidden",border:"2px solid #E7E5E4"}}/>
+      {/* Overlay badge */}
+      <div style={{position:"absolute",top:10,right:10,zIndex:1000,background:"#fff",borderRadius:10,padding:"6px 12px",boxShadow:"0 2px 12px rgba(0,0,0,.15)",display:"flex",alignItems:"center",gap:6}}>
+        <div style={{width:10,height:10,borderRadius:"50%",background:tierColor}}/>
+        <span style={{fontSize:10,fontWeight:700,color:tierColor}}>Radio {radiusKm}km</span>
+      </div>
+      <div style={{position:"absolute",bottom:10,left:10,zIndex:1000,background:"rgba(0,0,0,.75)",borderRadius:8,padding:"4px 10px"}}>
+        <span style={{fontSize:10,fontWeight:600,color:"#fff"}}>Arrastrá el pin o tocá el mapa</span>
+      </div>
+    </div>
+  );
+}
+
 function PetForm({title,sub,type,onSubmit,onClose,analyzePhoto,analyzingPhoto,analysisResult,setAnalysisResult}){
   const [d,setD]=useState({
     name:"",type:"dog",breed:"",description:"",
     location:{lat:-34.6037,lng:-58.3816,address:""},
     ownerName:"",ownerPhone:"",finderName:"",finderPhone:"",
+    phoneAreaCode:"11",phoneNumber:"",
     reward:"",plan:"free",status:type==="found"?"found":"lost",
     respondsToName:null,hasCollar:null,collarColor:"",hasChip:null,
     size:"",color:"",furLength:"",age:"",temperament:"",
     lastSeenTime:"",lastSeenDetail:"",distinctiveMarks:"",alertRadius:"5km",
+    exposureTier:"plata",
   });
   const [step,setStep]=useState(1);
   const [preview,setPreview]=useState(null);
   const [photoBase64,setPhotoBase64]=useState(null);
   const [photoType,setPhotoType]=useState(null);
+  const [geoLoading,setGeoLoading]=useState(false);
+  const [geoError,setGeoError]=useState(null);
   const fileRef=useRef(null);
   const handlePhoto=async(e)=>{const f=e.target.files[0];if(!f)return;const reader=new FileReader();reader.onload=(ev)=>{setPreview(ev.target.result);setPhotoBase64(ev.target.result.split(",")[1]);setPhotoType(f.type||"image/jpeg");};reader.readAsDataURL(f);};
   const handleAnalyze=async()=>{if(!photoBase64)return;const result=await analyzePhoto(photoBase64,photoType,d.description);if(result){setAnalysisResult(result);setD(p=>({...p,type:result.species||p.type,breed:result.breed||p.breed,color:result.primaryColor||p.color,size:result.size||p.size,furLength:result.furLength||p.furLength,hasCollar:result.hasCollar??p.hasCollar}));}};
   const up=(k,v)=>setD(p=>({...p,[k]:v}));
-  const handleSubmit=()=>{onSubmit({...d,photoData:preview,aiFeatures:analysisResult?{...analysisResult,source:"claude-vision"}:null});setAnalysisResult(null);};
-  const Chip=({label,selected,onClick,color="#E8590C"})=>(<button onClick={onClick} style={{padding:"8px 14px",borderRadius:10,border:selected?`2px solid ${color}`:"2px solid #E7E5E4",background:selected?`${color}0A`:"#fff",cursor:"pointer",fontSize:12,fontWeight:600,color:selected?color:"#78716C",fontFamily:"inherit",transition:"all .2s"}}>{label}</button>);
+
+  // GPS auto-location
+  const getGPS=()=>{
+    if(!navigator.geolocation){setGeoError("Tu navegador no soporta geolocalización");return;}
+    setGeoLoading(true);setGeoError(null);
+    navigator.geolocation.getCurrentPosition(
+      async(pos)=>{
+        const lat=pos.coords.latitude,lng=pos.coords.longitude;
+        setD(p=>({...p,location:{...p.location,lat,lng}}));
+        // Reverse geocode with free API
+        try{
+          const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&accept-language=es`);
+          const data=await r.json();
+          const addr=data.address;
+          const name=[addr.neighbourhood||addr.suburb||"",addr.city||addr.town||addr.village||"",addr.state||""].filter(Boolean).join(", ");
+          setD(p=>({...p,location:{lat,lng,address:name||`${lat.toFixed(4)}, ${lng.toFixed(4)}`}}));
+        }catch{setD(p=>({...p,location:{lat,lng,address:`${lat.toFixed(4)}, ${lng.toFixed(4)}`}}));}
+        setGeoLoading(false);
+      },
+      (err)=>{setGeoError(err.code===1?"Permiso de ubicación denegado":"No se pudo obtener ubicación");setGeoLoading(false);},
+      {enableHighAccuracy:true,timeout:10000}
+    );
+  };
+
+  // Format phone for WhatsApp and display
+  const getFullPhone=()=>{
+    const area=d.phoneAreaCode||"11";
+    const num=(d.phoneNumber||"").replace(/\D/g,"");
+    return `+54 ${area} ${num}`;
+  };
+
+  const handleSubmit=()=>{
+    const phone=getFullPhone();
+    const finalData={...d,photoData:preview,aiFeatures:analysisResult?{...analysisResult,source:"claude-vision"}:null};
+    if(type==="lost"){finalData.ownerPhone=phone;}else{finalData.finderPhone=phone;}
+    onSubmit(finalData);setAnalysisResult(null);
+  };
+  const Chip=({label,selected,onClick,color="#E8590C",icon=null})=>(<button onClick={onClick} style={{padding:"8px 14px",borderRadius:10,border:selected?`2px solid ${color}`:"2px solid #E7E5E4",background:selected?`${color}0A`:"#fff",cursor:"pointer",fontSize:12,fontWeight:600,color:selected?color:"#78716C",fontFamily:"inherit",transition:"all .2s",display:"inline-flex",alignItems:"center",gap:4}}>{icon}{label}</button>);
   const YesNo=({value,onChange})=>(<div style={{display:"flex",gap:6}}><Chip label="Sí" selected={value===true} onClick={()=>onChange(true)}/><Chip label="No" selected={value===false} onClick={()=>onChange(false)}/><Chip label="No sé" selected={value===null} onClick={()=>onChange(null)} color="#A8A29E"/></div>);
 
   return (
@@ -2850,16 +3013,106 @@ function PetForm({title,sub,type,onSubmit,onClose,analyzePhoto,analyzingPhoto,an
         <div style={{display:"flex",gap:7}}><button className="bo" onClick={()=>setStep(1)}>← Atrás</button><button className="bp" style={{flex:1,justifyContent:"center"}} onClick={()=>setStep(3)}>Siguiente <$.Arr s={14}/></button></div>
       </div>)}
 
-      {/* STEP 3: GEO / ALERT ZONE */}
+      {/* STEP 3: GEO / ALERT ZONE + EXPOSURE TIERS */}
       {step===3&&(<div style={{display:"flex",flexDirection:"column",gap:12,animation:"fadeIn .3s"}}>
-        <div style={{background:"#FEF3C7",border:"1px solid #FDE68A",borderRadius:12,padding:12,display:"flex",gap:10,alignItems:"flex-start"}}><$.Bell s={18} c="#D97706"/><div><div style={{fontWeight:700,fontSize:12,color:"#92400E",marginBottom:2}}>Alerta por geolocalización</div><div style={{fontSize:11,color:"#A16207",lineHeight:1.4}}>Notificaremos a usuarios en la zona cuando haya coincidencias.</div></div></div>
+        <div style={{background:"#FEF3C7",border:"1px solid #FDE68A",borderRadius:12,padding:12,display:"flex",gap:10,alignItems:"flex-start"}}><$.Bell s={18} c="#D97706"/><div><div style={{fontWeight:700,fontSize:12,color:"#92400E",marginBottom:2}}>Geolocalización + Difusión por radio</div><div style={{fontSize:11,color:"#A16207",lineHeight:1.4}}>Marcá dónde se extravió y elegí el alcance de la difusión en redes sociales.</div></div></div>
+
+        {/* GPS Button */}
+        <button onClick={getGPS} disabled={geoLoading} style={{
+          width:"100%",padding:"14px 16px",borderRadius:12,border:"2px solid #2563EB",
+          background:d.location.lat!==-34.6037?"#2563EB08":"#fff",
+          cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:8,
+          fontFamily:"inherit",fontWeight:700,fontSize:13,
+          color:d.location.lat!==-34.6037?"#2563EB":"#2563EB",transition:"all .2s",
+        }}>
+          {geoLoading?<><div style={{width:16,height:16,border:"2px solid #2563EB",borderTopColor:"transparent",borderRadius:"50%",animation:"spin .7s linear infinite"}}/> Obteniendo ubicación...</>:
+          d.location.lat!==-34.6037?<><$.Pin s={16} c="#2563EB"/> Ubicación detectada</>:
+          <><$.Pin s={16} c="#2563EB"/> Usar mi ubicación GPS</>}
+        </button>
+        {geoError&&<div style={{fontSize:11,color:"#DC2626",fontWeight:600}}>{geoError}</div>}
 
         <input placeholder={type==="lost"?"Zona / barrio donde se extravió":"Zona donde la encontraste"} value={d.location.address} onChange={e=>setD(p=>({...p,location:{...p.location,address:e.target.value}}))}/>
 
         {type==="lost"&&(<><label style={{fontSize:11,fontWeight:700,color:"#78716C",letterSpacing:".04em"}}>¿CUÁNDO FUE LA ÚLTIMA VEZ?</label><div style={{display:"flex",flexWrap:"wrap",gap:5}}>{["Hoy","Ayer","Hace 2-3 días","Hace 1 semana","Más de 1 semana"].map(t=>(<Chip key={t} label={t} selected={d.lastSeenTime===t} onClick={()=>up("lastSeenTime",t)}/>))}</div><input placeholder="Detalle del lugar (ej: 'cerca de la plaza, frente al kiosco')" value={d.lastSeenDetail} onChange={e=>up("lastSeenDetail",e.target.value)}/></>)}
 
-        <div><label style={{fontSize:11,fontWeight:700,color:"#78716C",letterSpacing:".04em",marginBottom:6,display:"block"}}>RADIO DE ALERTA</label><div style={{display:"flex",flexWrap:"wrap",gap:5}}>{["1km","3km","5km","10km","20km","Todo el país"].map(r=>(<Chip key={r} label={r} selected={d.alertRadius===r} onClick={()=>up("alertRadius",r)} color="#2563EB"/>))}</div>
-        {d.location.address&&<div style={{marginTop:8,background:"#2563EB08",border:"1px solid #2563EB15",borderRadius:10,padding:10,display:"flex",gap:8,alignItems:"center"}}><$.Pin s={16} c="#2563EB"/><div style={{fontSize:11,color:"#1E40AF",lineHeight:1.4}}><strong>Radio: {d.alertRadius}</strong> desde {d.location.address}. Usuarios en esta área recibirán alertas.</div></div>}</div>
+        {/* INTERACTIVE MAP WITH RADIUS */}
+        <div>
+          <label style={{fontSize:11,fontWeight:700,color:"#78716C",letterSpacing:".04em",marginBottom:6,display:"block"}}>RADIO DE BÚSQUEDA Y DIFUSIÓN</label>
+          <div style={{display:"flex",flexWrap:"wrap",gap:5,marginBottom:10}}>
+            {[
+              {r:"1km",km:1},{r:"3km",km:3},{r:"5km",km:5},
+              {r:"10km",km:10},{r:"20km",km:20},{r:"50km",km:50},
+            ].map(r=>(
+              <Chip key={r.r} label={r.r} selected={d.alertRadius===r.r} onClick={()=>up("alertRadius",r.r)} color="#2563EB"/>
+            ))}
+          </div>
+
+          {/* Leaflet Map */}
+          <MapRadius
+            lat={d.location.lat}
+            lng={d.location.lng}
+            radiusKm={{"1km":1,"3km":3,"5km":5,"10km":10,"20km":20,"50km":50}[d.alertRadius]||5}
+            onLocationChange={(lat,lng,addr)=>setD(p=>({...p,location:{lat,lng,address:addr||p.location.address}}))}
+            exposureTier={d.exposureTier}
+          />
+          <div style={{fontSize:10,color:"#A8A29E",marginTop:6,textAlign:"center"}}>Tocá el mapa para mover el pin · El círculo muestra el alcance de la difusión</div>
+        </div>
+
+        {/* EXPOSURE TIER SELECTOR - Plata / Oro / Platinum */}
+        {type==="lost"&&(
+          <div>
+            <label style={{fontSize:11,fontWeight:700,color:"#78716C",letterSpacing:".04em",marginBottom:8,display:"block"}}>NIVEL DE EXPOSICIÓN EN REDES</label>
+            <div style={{display:"flex",flexDirection:"column",gap:8}}>
+              {[
+                {key:"plata",name:"Plata",price:"US$20/sem",color:"#94A3B8",bg:"#94A3B808",border:"#94A3B830",
+                  badge:"🥈",freq:"Cada 24hs",reach:"5K personas",
+                  desc:"Publicamos tu anuncio en el feed de PetFinder para usuarios dentro de tu radio. Ideal para empezar la búsqueda.",
+                  feats:["Anuncio en plataforma PetFinder","Visible para usuarios en tu radio","Alerta push a vecinos","1 publicación por día","Resultados IA + contacto directo"]},
+                {key:"oro",name:"Oro",price:"US$50/sem",color:"#D97706",bg:"#D9770608",border:"#D97706",popular:true,
+                  badge:"🥇",freq:"Cada 12hs",reach:"50K personas",
+                  desc:"Anuncios pagos en Facebook e Instagram geolocalizados exactamente en el radio que marcaste en el mapa. La gente que está AHORA en esa zona ve tu mascota.",
+                  feats:["Todo Plata +","Anuncios Facebook Ads en tu radio","Anuncios Instagram en tu zona","Grupos WhatsApp barriales","Flyer profesional auto-generado","Republicación cada 12hs","Hashtags + geotags optimizados"]},
+                {key:"platinum",name:"Platinum",price:"US$79/sem",color:"#7C3AED",bg:"#7C3AED08",border:"#7C3AED",
+                  badge:"💎",freq:"Cada 6hs",reach:"200K+ personas",
+                  desc:"Máxima exposición: anuncios pagos en TODAS las redes geolocalizados en tu radio + alertas a refugios y veterinarias. Como pegar 10.000 afiches digitales.",
+                  feats:["Todo Oro +","TikTok + X + Telegram + Nextdoor","Alerta a refugios y vets en 20km","Anuncios en clasificados locales","Republicación cada 6hs","Reporte de alcance diario","Posición #1 destacada en feed","Contacto prioritario 24/7"]},
+              ].map(tier=>(
+                <div key={tier.key} onClick={()=>up("exposureTier",tier.key)} style={{
+                  border:d.exposureTier===tier.key?`2px solid ${tier.color}`:`2px solid ${tier.border||"#E7E5E4"}`,
+                  borderRadius:14,padding:14,cursor:"pointer",position:"relative",
+                  background:d.exposureTier===tier.key?tier.bg:"#fff",
+                  transition:"all .2s",
+                }}>
+                  {tier.popular&&<div style={{position:"absolute",top:-8,right:12,background:tier.color,color:"#fff",padding:"2px 10px",borderRadius:100,fontSize:9,fontWeight:800,letterSpacing:".06em"}}>POPULAR</div>}
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+                    <div style={{display:"flex",alignItems:"center",gap:8}}>
+                      <span style={{fontSize:20}}>{tier.badge}</span>
+                      <div>
+                        <div style={{fontWeight:800,fontSize:14,color:tier.color}}>{tier.name}</div>
+                        <div style={{fontSize:18,fontWeight:800,letterSpacing:"-.03em"}}>{tier.price}</div>
+                      </div>
+                    </div>
+                    <div style={{width:22,height:22,borderRadius:"50%",border:d.exposureTier===tier.key?`2px solid ${tier.color}`:"2px solid #E7E5E4",background:d.exposureTier===tier.key?tier.color:"#fff",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                      {d.exposureTier===tier.key&&<$.Check s={14} c="#fff"/>}
+                    </div>
+                  </div>
+                  <div style={{fontSize:11,color:"#57534E",lineHeight:1.4,marginBottom:8}}>{tier.desc}</div>
+                  <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+                    <span style={{background:`${tier.color}15`,color:tier.color,padding:"3px 8px",borderRadius:6,fontSize:10,fontWeight:700}}>📡 {tier.freq}</span>
+                    <span style={{background:`${tier.color}15`,color:tier.color,padding:"3px 8px",borderRadius:6,fontSize:10,fontWeight:700}}>👁 {tier.reach}</span>
+                  </div>
+                  {d.exposureTier===tier.key&&(
+                    <div style={{marginTop:8,display:"flex",flexWrap:"wrap",gap:3}}>
+                      {tier.feats.map((f,i)=>(<span key={i} style={{fontSize:10,color:"#57534E",display:"flex",alignItems:"center",gap:3}}><$.Check s={10} c={tier.color}/>{f}</span>))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {d.location.address&&<div style={{background:"#2563EB08",border:"1px solid #2563EB15",borderRadius:10,padding:10,display:"flex",gap:8,alignItems:"center"}}><$.Pin s={16} c="#2563EB"/><div style={{fontSize:11,color:"#1E40AF",lineHeight:1.4}}><strong>Radio: {d.alertRadius}</strong> desde {d.location.address}. {type==="lost"?`Nivel ${d.exposureTier}: anuncios disparados en redes cada ${d.exposureTier==="plata"?"24hs":d.exposureTier==="oro"?"12hs":"6hs"}.`:"Usuarios en esta área recibirán alertas."}</div></div>}
 
         <div style={{display:"flex",gap:7}}><button className="bo" onClick={()=>setStep(2)}>← Atrás</button><button className="bp" style={{flex:1,justifyContent:"center"}} onClick={()=>setStep(4)}>Siguiente <$.Arr s={14}/></button></div>
       </div>)}
@@ -2872,9 +3125,32 @@ function PetForm({title,sub,type,onSubmit,onClose,analyzePhoto,analyzingPhoto,an
             {[d.type==="dog"?"🐕 Perro":"🐈 Gato",d.breed,d.size&&({tiny:"Muy chico",small:"Chico",medium:"Mediano",large:"Grande",xlarge:"Muy grande"})[d.size],d.color,d.furLength&&`Pelo ${({short:"corto",medium:"medio",long:"largo",hairless:"sin pelo"})[d.furLength]}`,d.age&&({puppy:"Cachorro",young:"Joven",adult:"Adulto",senior:"Mayor"})[d.age],d.temperament,d.hasCollar===true?`Collar: ${d.collarColor||"sí"}`:d.hasCollar===false?"Sin collar":null,d.hasChip===true?"Con microchip":null,d.respondsToName===true&&d.name?`Responde a "${d.name}"`:null,d.distinctiveMarks,d.lastSeenTime&&`Visto: ${d.lastSeenTime}`].filter(Boolean).map((t,i)=>(<span key={i} style={{background:"#fff",padding:"3px 9px",borderRadius:7,fontSize:11,fontWeight:600,color:"#57534E",border:"1px solid #E7E5E4"}}>{t}</span>))}
           </div>
           {d.location.address&&<div style={{display:"flex",alignItems:"center",gap:4,marginTop:8,fontSize:11,color:"#2563EB"}}><$.Pin s={12} c="#2563EB"/> {d.location.address} · Radio {d.alertRadius}</div>}
+          {type==="lost"&&d.exposureTier&&(
+            <div style={{display:"flex",alignItems:"center",gap:4,marginTop:6,fontSize:11,fontWeight:700,color:d.exposureTier==="plata"?"#94A3B8":d.exposureTier==="oro"?"#D97706":"#7C3AED"}}>
+              {d.exposureTier==="plata"?"🥈":d.exposureTier==="oro"?"🥇":"💎"} Exposición {d.exposureTier.charAt(0).toUpperCase()+d.exposureTier.slice(1)} · {d.exposureTier==="plata"?"US$20":d.exposureTier==="oro"?"US$50":"US$79"}/sem
+            </div>
+          )}
         </div>
         <input placeholder="Tu nombre" value={type==="lost"?d.ownerName:d.finderName} onChange={e=>up(type==="lost"?"ownerName":"finderName",e.target.value)}/>
-        <input placeholder="Tu teléfono o WhatsApp" value={type==="lost"?d.ownerPhone:d.finderPhone} onChange={e=>up(type==="lost"?"ownerPhone":"finderPhone",e.target.value)}/>
+
+        {/* Phone with +54 format */}
+        <div>
+          <label style={{fontSize:11,fontWeight:700,color:"#78716C",letterSpacing:".04em",marginBottom:6,display:"block"}}>TELÉFONO / WHATSAPP</label>
+          <div style={{display:"flex",gap:6,alignItems:"center"}}>
+            <div style={{display:"flex",alignItems:"center",gap:0,flexShrink:0}}>
+              <span style={{background:"#F5F5F4",padding:"11px 10px",borderRadius:"11px 0 0 11px",border:"2px solid #E7E5E4",borderRight:"none",fontSize:13,fontWeight:700,color:"#57534E"}}>🇦🇷 +54</span>
+              <select value={d.phoneAreaCode} onChange={e=>up("phoneAreaCode",e.target.value)} style={{width:70,borderRadius:"0 0 0 0",borderLeft:"none",borderRight:"none",padding:"11px 4px",fontSize:13,fontWeight:600,textAlign:"center"}}>
+                <option value="11">11</option><option value="351">351</option><option value="341">341</option>
+                <option value="261">261</option><option value="381">381</option><option value="223">223</option>
+                <option value="343">343</option><option value="299">299</option><option value="362">362</option>
+                <option value="379">379</option><option value="388">388</option><option value="266">266</option>
+              </select>
+            </div>
+            <input placeholder="Ej: 5555-1234" value={d.phoneNumber} onChange={e=>up("phoneNumber",e.target.value)} style={{flex:1,borderRadius:"0 11px 11px 0",borderLeft:"none"}}/>
+          </div>
+          <div style={{fontSize:10,color:"#A8A29E",marginTop:4}}>Tu número completo: {getFullPhone()}</div>
+        </div>
+
         {type==="lost"&&<input placeholder="Recompensa (opcional, ej: $20.000)" value={d.reward} onChange={e=>up("reward",e.target.value)}/>}
         <div style={{display:"flex",gap:7}}><button className="bo" onClick={()=>setStep(3)}>← Atrás</button><button className="bp" style={{flex:1,justifyContent:"center"}} onClick={handleSubmit}><$.Check s={15}/> Publicar</button></div>
       </div>)}
