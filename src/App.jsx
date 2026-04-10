@@ -989,7 +989,6 @@ export default function App() {
     <div style={{minHeight:"100vh",fontFamily:"'Outfit',sans-serif",background:"#FAFAF9",color:"#1C1917"}}>
       <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet"/>
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
       <style>{CSS}</style>
 
       {notif&&<div className={`nt ${notif.t}`}>{notif.m}</div>}
@@ -1260,8 +1259,6 @@ export default function App() {
               <div onClick={()=>setPage("vet")} style={{marginTop:12,padding:"14px 16px",background:"rgba(5,150,105,.15)",borderRadius:12,border:"1px solid rgba(5,150,105,.3)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
                 <div style={{display:"flex",alignItems:"center",gap:8}}><$.AI s={18} c="#4ADE80"/><div><span style={{fontSize:13,fontWeight:800,color:"#4ADE80"}}>Veterinario IA</span><div style={{fontSize:10,color:"#94A3B8"}}>Consultá gratis sobre salud y síntomas</div></div></div>
                 <$.Arr s={16} c="#4ADE80"/>
-              </div>
-                <$.Arr s={14} c="#4ADE80"/>
               </div>
             </div>
           </section>
@@ -2985,11 +2982,20 @@ function MapRadius({ lat, lng, radiusKm, onLocationChange, exposureTier }) {
   const mapInstanceRef = useRef(null);
   const markerRef = useRef(null);
   const circleRef = useRef(null);
+  const [leafletReady, setLeafletReady] = useState(false);
   const tierColor = exposureTier==="platinum"?"#7C3AED":exposureTier==="oro"?"#D97706":"#94A3B8";
 
+  // Load Leaflet dynamically
   useEffect(()=>{
-    if(!mapRef.current||typeof window==="undefined"||!window.L) return;
-    // Init map once
+    if(window.L){setLeafletReady(true);return;}
+    const script=document.createElement("script");
+    script.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    script.onload=()=>setLeafletReady(true);
+    document.head.appendChild(script);
+  },[]);
+
+  useEffect(()=>{
+    if(!mapRef.current||!leafletReady||!window.L) return;
     if(!mapInstanceRef.current){
       const map = window.L.map(mapRef.current,{
         center:[lat,lng],zoom:13,zoomControl:true,
@@ -3040,7 +3046,7 @@ function MapRadius({ lat, lng, radiusKm, onLocationChange, exposureTier }) {
       // Fix map container size after modal animation
       setTimeout(()=>map.invalidateSize(),400);
     }
-  },[]);
+  },[leafletReady]);
 
   // Update circle when radius or tier changes
   useEffect(()=>{
