@@ -1064,16 +1064,16 @@ export default function App() {
             <div style={{maxWidth:720,margin:"0 auto",padding:"40px 16px 32px",textAlign:"center",position:"relative",zIndex:1}}>
               <div style={{display:"inline-flex",alignItems:"center",gap:6,background:"rgba(124,58,237,.15)",border:"1px solid rgba(124,58,237,.3)",padding:"6px 16px",borderRadius:100,marginBottom:18}}>
                 <div style={{width:8,height:8,borderRadius:4,background:"#4ADE80",boxShadow:"0 0 8px #4ADE80",animation:"pulse 1.5s infinite"}}/>
-                <span style={{fontSize:10,fontWeight:700,letterSpacing:".08em",color:"#C4B5FD"}}>RASTREO IA ACTIVO · 10+ REDES · 24/7</span>
+                <span style={{fontSize:10,fontWeight:700,letterSpacing:".08em",color:"#C4B5FD"}}>RASTREO IA ACTIVO.</span>
               </div>
 
               <h1 style={{fontFamily:"'Fraunces',serif",fontSize:"clamp(28px,7vw,46px)",fontWeight:800,lineHeight:1.06,letterSpacing:"-.03em",marginBottom:14}}>
                 Te ayudamos a encontrar<br/>tu mascota en{" "}
-                <span style={{background:"linear-gradient(135deg,#A78BFA,#FBBF24)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>24–72 horas</span>
+                <span style={{background:"linear-gradient(135deg,#A78BFA,#FBBF24)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>A partir de la foto que subas</span>
               </h1>
 
               <p style={{fontSize:15,color:"#94A3B8",lineHeight:1.6,maxWidth:440,margin:"0 auto 24px"}}>
-                Difusión inteligente, reportes por WhatsApp, cruce automático en redes y alertas geolocalizadas. Vos subís la foto, nosotros hacemos todo.
+                Difusión inteligente , reportes por WhatsApp, busqueda automática de coincidencias en redes por rasgos biometricos IA id, geolocalizacion marca en el mapa la zona de extravio . Vos subís la foto, nosotros hacemos todo.
               </p>
 
               {/* Main CTA */}
@@ -1094,7 +1094,7 @@ export default function App() {
                 onClick={()=>{if(requireAuth("reportar"))setModal("found");}}
                 onMouseEnter={e=>e.currentTarget.style.background="rgba(255,255,255,.14)"}
                 onMouseLeave={e=>e.currentTarget.style.background="rgba(255,255,255,.08)"}>
-                <$.Heart s={15} c="#A78BFA"/> Encontré una mascota (gratis)
+                <$.Heart s={15} c="#A78BFA"/> si encontraste una mascota perdida subi la foto aca (gratis)
               </button>
 
               <div style={{display:"flex",gap:12,justifyContent:"center",marginTop:28,flexWrap:"wrap"}}>
@@ -1113,7 +1113,7 @@ export default function App() {
             </div>
             <div style={{display:"flex",flexDirection:"column",gap:10}}>
               {[
-                {icon:<$.Zap s={22} c="#fff"/>,gradient:"linear-gradient(135deg,#7C3AED,#A78BFA)",title:"Difusión inteligente en 24–72hs",desc:"Mapa de búsqueda con IA según zona y probabilidad de desplazamiento. Cruce automático con reportes existentes.",tags:["Mapa de calor","Radio expandible","Cruce automático"],tagBg:"#7C3AED"},
+                {icon:<$.Zap s={22} c="#fff"/>,gradient:"linear-gradient(135deg,#7C3AED,#A78BFA)",title:"Difusión inteligente para busqueda de mascotas extraviadas",desc:"Mapa de búsqueda con IA según zona y probabilidad de desplazamiento. Cruce automático con reportes existentes.",tags:["Mapa de calor","Radio expandible","Cruce automático"],tagBg:"#7C3AED"},
                 {icon:<$.Msg s={22} c="#fff"/>,gradient:"linear-gradient(135deg,#25D366,#128C7E)",title:"Reportes por WhatsApp",desc:"Canal donde cualquier vecino puede enviar foto, ubicación y horario de un avistamiento. La IA cruza reportes automáticamente.",tags:["Sin app","Foto + ubicación","Cruce IA"],tagBg:"#128C7E"},
                 {icon:<$.Bell s={22} c="#fff"/>,gradient:"linear-gradient(135deg,#2563EB,#60A5FA)",title:"Alertas geolocalizadas por radio",desc:"La IA envía alertas automáticas a personas en radios específicos según probabilidad de desplazamiento. Se expande progresivamente.",tags:["Radio dinámico","Push vecinal","Expansión auto"],tagBg:"#2563EB"},
                 {icon:<$.Star s={22} c="#fff"/>,gradient:"linear-gradient(135deg,#E8590C,#F97316)",title:"Difusión paga para casos urgentes",desc:"IA optimiza anuncios en redes sociales y los muestra a la gente adecuada dentro del área crítica. Máxima exposición garantizada.",tags:["Anuncios IA","Segmentación","50K+ alcance"],tagBg:"#E8590C"},
@@ -1513,7 +1513,7 @@ export default function App() {
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:20}}>
             {[
               {i:<$.Cam s={20}/>,t:"Foto + datos",d:"Subí foto y completá el perfil de tu mascota",c:"#2563EB"},
-              {i:<$.Scan s={20}/>,t:"QR generado",d:"Te damos un código QR único para el collar",c:"#7C3AED"},
+              {i:<$.Scan s={20}/>,t:"QR generado",d:"Te damos un código QR imprimible para el collar",c:"#7C3AED"},
               {i:<$.Phone s={20}/>,t:"Escaneo fácil",d:"Cualquiera escanea y ve cómo contactarte",c:"#059669"},
               {i:<$.Shield s={20}/>,t:"Datos seguros",d:"Vos elegís qué información mostrar",c:"#D97706"},
             ].map((s,i)=>(
