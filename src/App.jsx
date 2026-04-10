@@ -1076,11 +1076,20 @@ export default function App() {
 
               {/* Main CTA */}
               <div style={{background:"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.1)",borderRadius:24,padding:28,maxWidth:620,margin:"0 auto 18px",backdropFilter:"blur(10px)"}}>
-                <div style={{width:74,height:74,borderRadius:20,background:"linear-gradient(135deg,#7C3AED,#A78BFA)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 14px",boxShadow:"0 8px 30px rgba(124,58,237,.3)"}}>
-                  <$.Scan s={28} c="#fff"/>
+                <div style={{width:90,height:90,borderRadius:22,background:"linear-gradient(135deg,#7C3AED,#A78BFA)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 14px",boxShadow:"0 8px 30px rgba(124,58,237,.3)"}}>
+                  <$.Scan s={36} c="#fff"/>
                 </div>
                 <div style={{fontWeight:800,fontSize:26,marginBottom:8}}>Subí la foto, nosotros la buscamos</div>
-                <div style={{fontSize:15,color:"#94A3B8",marginBottom:20}}>Face ID Tracker + Reportes WhatsApp + Alertas geolocalizadas</div>
+                {/* Social network logos row */}
+                <div style={{display:"flex",justifyContent:"center",gap:6,flexWrap:"wrap",marginBottom:16}}>
+                  {[
+                    {n:"IG",bg:"#E4405F"},{n:"FB",bg:"#1877F2"},{n:"X",bg:"#000"},{n:"TT",bg:"#ff0050"},
+                    {n:"WA",bg:"#25D366"},{n:"TG",bg:"#0088CC"},{n:"YT",bg:"#FF0000"},{n:"ND",bg:"#00B246"},
+                  ].map((s,i)=>(
+                    <div key={i} style={{width:32,height:32,borderRadius:8,background:s.bg,display:"flex",alignItems:"center",justifyContent:"center",fontSize:9,fontWeight:800,color:"#fff",opacity:.9}}>{s.n}</div>
+                  ))}
+                </div>
+                <div style={{fontSize:13,color:"#94A3B8",marginBottom:16}}>Difundimos en 8 redes sociales con geolocalización</div>
                 <button className="bp" style={{width:"100%",justifyContent:"center",padding:"18px",fontSize:19,background:"linear-gradient(135deg,#7C3AED,#A78BFA)",borderRadius:14,boxShadow:"0 8px 30px rgba(124,58,237,.4)"}}
                   onClick={()=>{if(requireAuth("activar rastreo"))setModal("register");}}>
                   <$.Cam s={22}/> Subir foto y activar rastreo
@@ -1147,60 +1156,66 @@ export default function App() {
             </div>
           </section>
 
-          {/* ═══ REDES SOCIALES SECTION ═══ */}
+          {/* ═══ PETFINDER TV — YOUTUBE ═══ */}
           <section style={{padding:"0 14px 24px",maxWidth:640,margin:"0 auto"}}>
-            <div style={{background:"linear-gradient(135deg,#1E293B,#0F172A)",borderRadius:18,padding:20,position:"relative",overflow:"hidden"}}>
-              <div style={{position:"absolute",top:-20,right:-20,width:80,height:80,borderRadius:"50%",background:"rgba(124,58,237,.1)"}}/>
-              <div style={{fontSize:10,fontWeight:700,color:"#A78BFA",letterSpacing:".1em",marginBottom:10}}>DIFUSIÓN EN REDES</div>
-              <div style={{fontWeight:800,fontSize:18,color:"#fff",marginBottom:6}}>Tu mascota en todas las redes</div>
-              <div style={{fontSize:12,color:"#94A3B8",lineHeight:1.5,marginBottom:14}}>Publicamos anuncios geolocalizados donde se perdió tu mascota. La gente que pasa por esa zona ve el anuncio en su celular.</div>
-              <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:14}}>
-                {[
-                  {n:"Instagram",c:"#E4405F"},{n:"Facebook",c:"#1877F2"},{n:"X",c:"#fff"},
-                  {n:"TikTok",c:"#fff"},{n:"WhatsApp",c:"#25D366"},{n:"Telegram",c:"#0088CC"},
-                  {n:"YouTube",c:"#FF0000"},{n:"Nextdoor",c:"#00B246"},
-                ].map((s,i)=>(
-                  <span key={i} style={{background:`${s.c}20`,color:s.c,padding:"5px 12px",borderRadius:8,fontSize:11,fontWeight:700}}>{s.n}</span>
-                ))}
+            <div style={{background:"#fff",borderRadius:18,border:"1px solid #E7E5E4",overflow:"hidden"}}>
+              <div style={{background:"linear-gradient(135deg,#DC2626,#EF4444)",padding:"18px 18px 14px",display:"flex",alignItems:"center",gap:10}}>
+                <svg width={32} height={32} viewBox="0 0 24 24" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="#DC2626" points="9.545 15.568 15.818 12 9.545 8.432"/></svg>
+                <div><div style={{fontWeight:800,fontSize:18,color:"#fff"}}>PetFinder TV</div><div style={{fontSize:11,color:"#FECACA"}}>Canal YouTube oficial</div></div>
               </div>
-              <button className="bp" style={{width:"100%",justifyContent:"center",background:"linear-gradient(135deg,#7C3AED,#A78BFA)"}}
-                onClick={()=>{if(requireAuth("ver planes"))setModal("premium");}}>
-                <$.Zap s={16}/> Ver planes de difusión
-              </button>
+              <div style={{padding:16}}>
+                <div style={{fontSize:13,color:"#57534E",lineHeight:1.6,marginBottom:14}}>Cada mascota reportada se convierte en un video con foto, datos, zona y contacto. Los usuarios también suben avistamientos.</div>
+                <div style={{background:"#0F172A",borderRadius:14,padding:20,marginBottom:14,position:"relative",overflow:"hidden"}}>
+                  <div style={{position:"absolute",top:8,right:8,background:"#DC2626",color:"#fff",padding:"2px 8px",borderRadius:4,fontSize:9,fontWeight:800}}>EN VIVO</div>
+                  <div style={{textAlign:"center"}}><div style={{fontSize:36,marginBottom:8}}>🐕</div><div style={{fontWeight:800,fontSize:14,color:"#fff"}}>MAX — Golden Retriever perdido</div><div style={{fontSize:11,color:"#94A3B8",marginTop:4}}>Palermo, Buenos Aires · Visto hace 2 días</div></div>
+                </div>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:14}}>
+                  {[{icon:"📹",t:"Videos automáticos",d:"Cada reporte genera un video"},{icon:"👀",t:"Avistamientos",d:"Usuarios suben lo que ven"},{icon:"🔔",t:"Alertas zona",d:"Suscribite para tu barrio"},{icon:"📢",t:"Compartí",d:"Viralizar salva mascotas"}].map((f,i)=>(
+                    <div key={i} style={{background:"#FEF2F2",borderRadius:10,padding:10}}><div style={{fontSize:18,marginBottom:4}}>{f.icon}</div><div style={{fontWeight:700,fontSize:11,color:"#DC2626"}}>{f.t}</div><div style={{fontSize:10,color:"#78716C"}}>{f.d}</div></div>
+                  ))}
+                </div>
+                <button onClick={()=>window.open("https://youtube.com/@PetFinderAI","_blank")} style={{width:"100%",padding:"14px",borderRadius:12,border:"none",background:"linear-gradient(135deg,#DC2626,#EF4444)",color:"#fff",cursor:"pointer",fontFamily:"inherit",fontWeight:700,fontSize:14,display:"flex",alignItems:"center",justifyContent:"center",gap:8,boxShadow:"0 4px 16px rgba(220,38,38,.3)"}}>
+                  <svg width={18} height={18} viewBox="0 0 24 24" fill="#fff"><polygon points="9.545 15.568 15.818 12 9.545 8.432"/></svg> Ir a PetFinder TV
+                </button>
+              </div>
             </div>
           </section>
 
-          {/* ═══ YOUTUBE CHANNEL ═══ */}
+          {/* ═══ PLAN DE BÚSQUEDA EN REDES + PAGOS ═══ */}
           <section style={{padding:"0 14px 24px",maxWidth:640,margin:"0 auto"}}>
-            <div style={{background:"#fff",borderRadius:18,border:"1px solid #E7E5E4",overflow:"hidden"}}>
-              <div style={{background:"linear-gradient(135deg,#DC2626,#EF4444)",padding:"16px 18px",display:"flex",alignItems:"center",gap:10}}>
-                <svg width={28} height={28} viewBox="0 0 24 24" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="#DC2626" points="9.545 15.568 15.818 12 9.545 8.432"/></svg>
-                <div>
-                  <div style={{fontWeight:800,fontSize:16,color:"#fff"}}>Canal YouTube PetFinder AI</div>
-                  <div style={{fontSize:11,color:"#FECACA"}}>Mascotas perdidas y encontradas en video</div>
-                </div>
+            <div style={{background:"linear-gradient(135deg,#1E293B,#0F172A)",borderRadius:18,padding:20,position:"relative",overflow:"hidden"}}>
+              <div style={{position:"absolute",top:-20,right:-20,width:80,height:80,borderRadius:"50%",background:"rgba(124,58,237,.1)"}}/>
+              <div style={{fontSize:10,fontWeight:700,color:"#A78BFA",letterSpacing:".1em",marginBottom:10}}>PLAN DE BÚSQUEDA EN REDES</div>
+              <div style={{fontWeight:800,fontSize:18,color:"#fff",marginBottom:12}}>Así buscamos a tu mascota</div>
+              <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:16}}>
+                {[
+                  {n:"1",c:"#4ADE80",t:"Subís la foto (gratis)",d:"Cargás foto, datos y zona. La IA analiza raza, color, marcas."},
+                  {n:"2",c:"#60A5FA",t:"Elegís el radio en el mapa",d:"Marcás dónde se perdió y el radio de búsqueda."},
+                  {n:"3",c:"#A78BFA",t:"Elegís nivel de exposición",d:"Plata (feed), Oro (FB+IG+WA) o Platinum (todas las redes)."},
+                  {n:"4",c:"#FBBF24",t:"Anuncios geolocalizados",d:"La gente en esa zona ve a tu mascota en sus redes."},
+                  {n:"5",c:"#F87171",t:"Coincidencias y contactos",d:"Vecinos reportan, la IA cruza y te conectamos."},
+                ].map((s,i)=>(
+                  <div key={i} style={{display:"flex",gap:10}}><div style={{width:28,height:28,borderRadius:8,background:s.c,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:800,color:"#fff",flexShrink:0}}>{s.n}</div><div><div style={{fontWeight:700,fontSize:12,color:"#fff"}}>{s.t}</div><div style={{fontSize:10,color:"#94A3B8",lineHeight:1.4}}>{s.d}</div></div></div>
+                ))}
               </div>
-              <div style={{padding:16}}>
-                <div style={{fontSize:13,color:"#57534E",lineHeight:1.6,marginBottom:12}}>
-                  Todas las mascotas reportadas se publican automáticamente en nuestro canal de YouTube con foto, descripción, zona y contacto. Más visibilidad para encontrarlas.
-                </div>
-                <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:14}}>
-                  {["Videos con foto y datos","Actualizaciones diarias","Compartí en tus redes","Suscribite para alertas"].map((f,i)=>(
-                    <span key={i} style={{background:"#FEF2F2",color:"#DC2626",padding:"4px 10px",borderRadius:7,fontSize:10,fontWeight:700,display:"flex",alignItems:"center",gap:3}}>
-                      <$.Check s={10} c="#DC2626"/>{f}
-                    </span>
+              <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:14}}>
+                {[{n:"Instagram",c:"#E4405F"},{n:"Facebook",c:"#1877F2"},{n:"X",c:"#fff"},{n:"TikTok",c:"#fff"},{n:"WhatsApp",c:"#25D366"},{n:"Telegram",c:"#0088CC"},{n:"YouTube",c:"#FF0000"},{n:"Nextdoor",c:"#00B246"}].map((s,i)=>(
+                  <span key={i} style={{background:`${s.c}20`,color:s.c,padding:"5px 12px",borderRadius:8,fontSize:11,fontWeight:700}}>{s.n}</span>
+                ))}
+              </div>
+              {/* Payment methods */}
+              <div style={{background:"rgba(255,255,255,.06)",borderRadius:12,padding:14,border:"1px solid rgba(255,255,255,.1)",marginBottom:14}}>
+                <div style={{fontSize:10,fontWeight:700,color:"#FBBF24",letterSpacing:".06em",marginBottom:8}}>FORMAS DE PAGO</div>
+                <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
+                  {[{n:"💳 MercadoPago",c:"#00AEEF"},{n:"💳 Tarjeta crédito/débito",c:"#A78BFA"},{n:"🏦 Transferencia",c:"#4ADE80"},{n:"💵 Stripe (USD)",c:"#635BFF"}].map((p,i)=>(
+                    <span key={i} style={{background:`${p.c}15`,color:p.c,padding:"5px 12px",borderRadius:8,fontSize:11,fontWeight:700}}>{p.n}</span>
                   ))}
                 </div>
-                <button onClick={()=>window.open("https://youtube.com/@PetFinderAI","_blank")} style={{
-                  width:"100%",padding:"12px",borderRadius:10,border:"none",
-                  background:"linear-gradient(135deg,#DC2626,#EF4444)",color:"#fff",
-                  cursor:"pointer",fontFamily:"inherit",fontWeight:700,fontSize:13,
-                  display:"flex",alignItems:"center",justifyContent:"center",gap:8,
-                }}>
-                  <svg width={16} height={16} viewBox="0 0 24 24" fill="#fff"><polygon points="9.545 15.568 15.818 12 9.545 8.432"/></svg>
-                  Ver canal de YouTube
-                </button>
+                <div style={{fontSize:10,color:"#94A3B8",marginTop:8,lineHeight:1.4}}>Argentina: MercadoPago (AR$) · Tarjeta · Transferencia<br/>LATAM: Stripe (USD) · Tarjeta internacional</div>
               </div>
+              <button className="bp" style={{width:"100%",justifyContent:"center",background:"linear-gradient(135deg,#7C3AED,#A78BFA)"}} onClick={()=>{if(requireAuth("ver planes"))setModal("premium");}}>
+                <$.Zap s={16}/> Ver planes y precios
+              </button>
             </div>
           </section>
 
@@ -1255,10 +1270,16 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              {/* Vet IA highlight */}
-              <div onClick={()=>setPage("vet")} style={{marginTop:12,padding:"14px 16px",background:"rgba(5,150,105,.15)",borderRadius:12,border:"1px solid rgba(5,150,105,.3)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-                <div style={{display:"flex",alignItems:"center",gap:8}}><$.AI s={18} c="#4ADE80"/><div><span style={{fontSize:13,fontWeight:800,color:"#4ADE80"}}>Veterinario IA</span><div style={{fontSize:10,color:"#94A3B8"}}>Consultá gratis sobre salud y síntomas</div></div></div>
-                <$.Arr s={16} c="#4ADE80"/>
+              {/* Vet IA highlight — BIG CTA */}
+              <div onClick={()=>setPage("vet")} style={{marginTop:14,padding:"20px 18px",background:"linear-gradient(135deg,rgba(5,150,105,.2),rgba(16,185,129,.15))",borderRadius:16,border:"2px solid rgba(5,150,105,.35)",cursor:"pointer",display:"flex",alignItems:"center",gap:14,transition:"all .2s"}}>
+                <div style={{width:56,height:56,borderRadius:16,background:"linear-gradient(135deg,#059669,#10B981)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"0 4px 16px rgba(5,150,105,.3)"}}>
+                  <$.AI s={28} c="#fff"/>
+                </div>
+                <div style={{flex:1}}>
+                  <div style={{fontWeight:800,fontSize:17,color:"#4ADE80",letterSpacing:"-.02em"}}>Veterinario IA Gratuito</div>
+                  <div style={{fontSize:12,color:"#94A3B8",lineHeight:1.4,marginTop:2}}>Consultá sobre salud, síntomas, alimentación y emergencias. Sin costo, sin límite.</div>
+                </div>
+                <$.Arr s={20} c="#4ADE80"/>
               </div>
             </div>
           </section>
@@ -1273,8 +1294,8 @@ export default function App() {
                   <$.Paw s={26} c="#fff"/>
                 </div>
                 <div>
-                  <div style={{fontWeight:800,fontSize:17,color:"#92400E",letterSpacing:"-.02em"}}>PetFinder Club</div>
-                  <div style={{fontSize:12,color:"#A16207",lineHeight:1.4,marginTop:2}}>Hacé socio a tu mascota por us$6/mes. Vet IA, QR, ficha médica y todo listo si se pierde.</div>
+                  <div style={{fontWeight:800,fontSize:17,color:"#92400E",letterSpacing:"-.02em"}}>Club Pet</div>
+                  <div style={{fontSize:12,color:"#A16207",lineHeight:1.4,marginTop:2}}>Hacé socio a tu mascota por us$6/mes. Vet IA, QR, PetMatch, adopción, guarda, PetFit y comunidad.</div>
                   <div style={{display:"flex",alignItems:"center",gap:6,marginTop:8}}>
                     <span style={{background:"#E8590C",color:"#fff",padding:"5px 14px",borderRadius:8,fontSize:12,fontWeight:700}}>us$6/mes</span>
                     <span style={{fontSize:10,color:"#92400E",fontWeight:600}}>Menos que un café ☕</span>
@@ -1940,18 +1961,21 @@ export default function App() {
             <div style={{background:"#fff",borderRadius:20,border:"2px solid #F59E0B30",overflow:"hidden"}}>
               <div style={{background:"linear-gradient(135deg,#F59E0B,#E8590C)",padding:"16px 18px",color:"#fff"}}>
                 <div style={{fontWeight:800,fontSize:16}}>Todo esto por us$6/mes</div>
-                <div style={{fontSize:11,opacity:.85,marginTop:2}}>El plan más accesible para cuidar a tu mascota</div>
+                <div style={{fontSize:11,opacity:.85,marginTop:2}}>Tu mascota merece el mejor cuidado</div>
               </div>
               <div style={{padding:18}}>
                 {[
                   {emoji:"📱",title:"Carnet digital + QR para el collar",desc:"Perfil completo de tu mascota con foto, datos y QR. Si alguien la encuentra, escanea y te contacta al instante.",highlight:true},
-                  {emoji:"🩺",title:"Veterinario IA ilimitado 24/7",desc:"Consultá sobre salud, síntomas, alimentación y cuidados las 24 horas. Sin límite de consultas."},
-                  {emoji:"📍",title:"Mapa de veterinarias y petshops cercanos",desc:"Encontrá las veterinarias, petshops y servicios más cerca tuyo con ratings y precios."},
-                  {emoji:"💉",title:"Recordatorios de vacunas y desparasitación",desc:"La app te avisa cuándo toca la próxima vacuna, desparasitación o control. Nunca más te olvidás."},
-                  {emoji:"🏥",title:"Acceso rápido a veterinarias cercanas",desc:"Buscá veterinarias, petshops y servicios pet cerca tuyo directamente desde la app."},
-                  {emoji:"👥",title:"Comunidad de dueños de tu zona",desc:"Conectá con otros dueños de mascotas cerca tuyo. Compartí tips, organizá paseos grupales."},
-                  {emoji:"📋",title:"Ficha médica digital",desc:"Todo el historial de tu mascota en un lugar: vacunas, alergias, condiciones, visitas al vet."},
-                  {emoji:"🔔",title:"Alertas de mascotas perdidas en tu zona",desc:"Si alguien pierde una mascota cerca tuyo, te avisamos. Podés ayudar a encontrarla."},
+                  {emoji:"🩺",title:"Veterinario IA ilimitado",desc:"Consultá sobre salud, síntomas, alimentación y cuidados. Sin límite de consultas."},
+                  {emoji:"❤️",title:"PetMatch — Conectá mascotas",desc:"Encontrá compañeros de paseo, citas de juego y socializá a tu mascota con otras de tu zona."},
+                  {emoji:"🏠",title:"Adopción — Dá o adoptá",desc:"Publicá mascotas en adopción o encontrá tu próximo compañero. Proceso seguro y verificado."},
+                  {emoji:"🤝",title:"Guarda temporal",desc:"Ofrecé tu hogar o encontrá hogares de tránsito para mascotas que lo necesitan."},
+                  {emoji:"💪",title:"PetFit — Salud y bienestar",desc:"Tracker de salud diario con tips de alimentación, ejercicio y bienestar para tu mascota."},
+                  {emoji:"👥",title:"Comunidad de dueños",desc:"Conectá con otros dueños de mascotas cerca tuyo. Compartí tips, organizá paseos grupales."},
+                  {emoji:"📍",title:"Mapa de veterinarias y petshops",desc:"Encontrá veterinarias, petshops y servicios pet cerca tuyo con ratings y precios."},
+                  {emoji:"💉",title:"Recordatorios de vacunas",desc:"La app te avisa cuándo toca la próxima vacuna, desparasitación o control."},
+                  {emoji:"📋",title:"Ficha médica digital",desc:"Todo el historial de tu mascota: vacunas, alergias, condiciones, visitas al vet."},
+                  {emoji:"🔔",title:"Alertas de mascotas perdidas",desc:"Si alguien pierde una mascota cerca tuyo, te avisamos para que puedas ayudar."},
                 ].map((f,i)=>(
                   <div key={i} style={{display:"flex",gap:12,padding:"14px 0",borderBottom:i<7?"1px solid #F5F5F4":"none",alignItems:"flex-start"}}>
                     <div style={{fontSize:22,flexShrink:0,marginTop:2}}>{f.emoji}</div>
@@ -3159,8 +3183,8 @@ function PetForm({title,sub,type,onSubmit,onClose,analyzePhoto,analyzingPhoto,an
 
       {/* STEP 1: PHOTO */}
       {step===1&&(<div style={{display:"flex",flexDirection:"column",gap:18,animation:"fadeIn .3s"}}>
-        <div onClick={()=>fileRef.current?.click()} style={{border:"2px dashed #E7E5E4",borderRadius:18,padding:preview?0:24,textAlign:"center",cursor:"pointer",background:preview?"none":"#FAFAF9",minHeight:280,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden"}}>
-          {preview?<img src={preview} style={{width:"100%",height:340,objectFit:"cover",borderRadius:18}} alt=""/>:<><$.Cam s={28} c="#D6D3D1"/><div style={{marginTop:8,fontWeight:600,color:"#A8A29E",fontSize:13}}>Subir foto</div><div style={{fontSize:10,color:"#D6D3D1",marginTop:2}}>La IA analizará la imagen</div></>}
+        <div onClick={()=>fileRef.current?.click()} style={{border:"2px dashed #E7E5E4",borderRadius:18,padding:preview?0:32,textAlign:"center",cursor:"pointer",background:preview?"none":"#FAFAF9",minHeight:360,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden"}}>
+          {preview?<img src={preview} style={{width:"100%",height:400,objectFit:"cover",borderRadius:18}} alt=""/>:<><$.Cam s={44} c="#D6D3D1"/><div style={{marginTop:12,fontWeight:700,color:"#78716C",fontSize:16}}>Tocá para subir foto</div><div style={{fontSize:12,color:"#D6D3D1",marginTop:4,maxWidth:240}}>Sacale una foto con la cámara o elegí de la galería. Cuanto más nítida, mejor busca la IA.</div></>}
           {preview&&!analysisResult&&!analyzingPhoto&&<button className="bp" style={{position:"absolute",bottom:8,left:"50%",transform:"translateX(-50%)",padding:"7px 14px",fontSize:11,borderRadius:9,animation:"glow 2s infinite"}} onClick={e=>{e.stopPropagation();handleAnalyze();}}><$.Scan s={13} c="#fff"/> Analizar con IA</button>}
           {analyzingPhoto&&<div style={{position:"absolute",inset:0,background:"rgba(0,0,0,.6)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:8,borderRadius:12}}><div style={{width:36,height:36,border:"3px solid #E8590C",borderTopColor:"transparent",borderRadius:"50%",animation:"spin .7s linear infinite"}}/><div style={{color:"#fff",fontSize:12,fontWeight:600}}>Analizando...</div></div>}
           {analysisResult&&<div style={{position:"absolute",bottom:8,right:8,background:"#059669",color:"#fff",borderRadius:8,padding:"3px 10px",fontSize:10,fontWeight:700,display:"flex",alignItems:"center",gap:3}}><$.Check s={12} c="#fff"/> IA OK</div>}
@@ -4110,7 +4134,7 @@ function ReminderForm({ onSubmit, onClose }) {
 
 function AuthForm({onSubmit}){
   const [mode,setMode]=useState("login");
-  const [d,setD]=useState({name:"",email:"",phone:"",password:""});
+  const [d,setD]=useState({name:"",email:"",phone:"",password:"",petName:"",petType:"dog"});
   const [showPass,setShowPass]=useState(false);
   const [errors,setErrors]=useState({});
 
@@ -4130,50 +4154,88 @@ function AuthForm({onSubmit}){
     onSubmit(d,mode);
   };
 
+  const Field=({placeholder,value,onChange,error,type="text",extra=null})=>(
+    <div>
+      <div style={{position:"relative"}}>
+        <input placeholder={placeholder} type={type} value={value} onChange={e=>{onChange(e.target.value);if(error)setErrors(p=>({...p,[error]:undefined}));}}
+          style={{borderColor:errors[error]?"#DC2626":undefined,width:"100%"}}
+          onKeyDown={e=>e.key==="Enter"&&handleSubmit()}/>
+        {extra}
+      </div>
+      {errors[error]&&<div style={{fontSize:11,color:"#DC2626",marginTop:3,fontWeight:600}}>{errors[error]}</div>}
+    </div>
+  );
+
   return (
     <div>
       <div style={{textAlign:"center",marginBottom:18}}>
-        <div style={{width:50,height:50,borderRadius:14,margin:"0 auto 12px",background:"linear-gradient(135deg,#E8590C,#DC2626)",display:"flex",alignItems:"center",justifyContent:"center"}}><$.User s={24} c="#fff"/></div>
-        <h3 style={{fontSize:18,fontWeight:800}}>{mode==="login"?"Iniciar sesión":"Crear cuenta"}</h3>
-        <p style={{fontSize:12,color:"#A8A29E",marginTop:4}}>{mode==="login"?"Ingresá tus datos":"Registrate gratis en segundos"}</p>
+        <div style={{width:56,height:56,borderRadius:16,margin:"0 auto 12px",background:"linear-gradient(135deg,#E8590C,#DC2626)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+          <$.User s={26} c="#fff"/>
+        </div>
+        <h3 style={{fontSize:20,fontWeight:800,letterSpacing:"-.03em"}}>{mode==="login"?"Bienvenido a PetFinder":"Crear cuenta"}</h3>
+        <p style={{fontSize:12,color:"#A8A29E",marginTop:4}}>{mode==="login"?"Ingresá para encontrar a tu mascota":"Registrate gratis en 30 segundos"}</p>
       </div>
       <div style={{display:"flex",flexDirection:"column",gap:10}}>
         {mode==="register"&&(
-          <div>
-            <input placeholder="Tu nombre" value={d.name} onChange={e=>{setD(p=>({...p,name:e.target.value}));setErrors(p=>({...p,name:undefined}));}} style={{borderColor:errors.name?"#DC2626":undefined}}/>
-            {errors.name&&<div style={{fontSize:11,color:"#DC2626",marginTop:3,fontWeight:600}}>{errors.name}</div>}
-          </div>
+          <>
+            <Field placeholder="Tu nombre completo" value={d.name} onChange={v=>setD(p=>({...p,name:v}))} error="name"/>
+
+            {/* Pet info section */}
+            <div style={{background:"#FEF3C7",borderRadius:12,padding:12,border:"1px solid #FDE68A"}}>
+              <div style={{fontSize:10,fontWeight:700,color:"#92400E",letterSpacing:".05em",marginBottom:8}}>DATOS DE TU MASCOTA (OPCIONAL)</div>
+              <input placeholder="Nombre de tu mascota (ej: Max, Luna...)" value={d.petName} onChange={e=>setD(p=>({...p,petName:e.target.value}))} style={{marginBottom:8}}/>
+              <div style={{display:"flex",gap:6}}>
+                {[{k:"dog",l:"Perro",i:<$.Dog s={14}/>},{k:"cat",l:"Gato",i:<$.Cat s={14}/>}].map(t=>(
+                  <button key={t.k} onClick={()=>setD(p=>({...p,petType:t.k}))} style={{
+                    flex:1,padding:"8px",borderRadius:8,
+                    border:d.petType===t.k?"2px solid #E8590C":"2px solid #E7E5E4",
+                    background:d.petType===t.k?"#E8590C08":"#fff",
+                    cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:4,
+                    fontWeight:700,fontSize:12,color:d.petType===t.k?"#E8590C":"#78716C",fontFamily:"inherit",
+                  }}>{t.i}{t.l}</button>
+                ))}
+              </div>
+              <div style={{fontSize:10,color:"#A16207",marginTop:6}}>Si la tenés, cargá los datos ahora y si algún día se pierde, el rastreo se activa al instante.</div>
+            </div>
+          </>
         )}
-        <div>
-          <input placeholder="Email" type="email" value={d.email} onChange={e=>{setD(p=>({...p,email:e.target.value}));setErrors(p=>({...p,email:undefined}));}} style={{borderColor:errors.email?"#DC2626":undefined}}/>
-          {errors.email&&<div style={{fontSize:11,color:"#DC2626",marginTop:3,fontWeight:600}}>{errors.email}</div>}
-        </div>
+        <Field placeholder="Email" value={d.email} onChange={v=>setD(p=>({...p,email:v}))} error="email" type="email"/>
         <div style={{position:"relative"}}>
-          <input placeholder="Contraseña" type={showPass?"text":"password"} value={d.password} onChange={e=>{setD(p=>({...p,password:e.target.value}));setErrors(p=>({...p,password:undefined}));}} style={{borderColor:errors.password?"#DC2626":undefined,paddingRight:44}}
+          <input placeholder="Contraseña" type={showPass?"text":"password"} value={d.password} 
+            onChange={e=>{setD(p=>({...p,password:e.target.value}));setErrors(p=>({...p,password:undefined}));}}
+            style={{borderColor:errors.password?"#DC2626":undefined,paddingRight:44,width:"100%"}}
             onKeyDown={e=>e.key==="Enter"&&handleSubmit()}/>
           <button onClick={()=>setShowPass(!showPass)} style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",padding:4}}>
             <$.Eye s={16} c={showPass?"#E8590C":"#A8A29E"}/>
           </button>
           {errors.password&&<div style={{fontSize:11,color:"#DC2626",marginTop:3,fontWeight:600}}>{errors.password}</div>}
         </div>
-        {mode==="register"&&<input placeholder="Teléfono (opcional)" value={d.phone} onChange={e=>setD(p=>({...p,phone:e.target.value}))}/>}
-        <button className="bp" style={{width:"100%",justifyContent:"center",marginTop:4}} onClick={handleSubmit}>
-          {mode==="login"?<><$.Shield s={15}/> Entrar</>:<><$.Check s={15}/> Crear cuenta</>}
+        {mode==="register"&&(
+          <div style={{display:"flex",gap:0,alignItems:"center"}}>
+            <span style={{background:"#F5F5F4",padding:"11px 10px",borderRadius:"11px 0 0 11px",border:"2px solid #E7E5E4",borderRight:"none",fontSize:12,fontWeight:700,color:"#57534E",whiteSpace:"nowrap"}}>🇦🇷 +54</span>
+            <input placeholder="11 5555-1234" value={d.phone} onChange={e=>setD(p=>({...p,phone:e.target.value}))} style={{borderRadius:"0 11px 11px 0",borderLeft:"none"}}/>
+          </div>
+        )}
+        <button className="bp" style={{width:"100%",justifyContent:"center",marginTop:4,padding:"14px",fontSize:15}} onClick={handleSubmit}>
+          {mode==="login"?<><$.Paw s={16}/> Entrar</>:<><$.Check s={16}/> Crear cuenta gratis</>}
         </button>
         
-        {/* Divider */}
         <div style={{display:"flex",alignItems:"center",gap:10,margin:"4px 0"}}>
           <div style={{flex:1,height:1,background:"#E7E5E4"}}/>
           <span style={{fontSize:11,color:"#A8A29E",fontWeight:600}}>o</span>
           <div style={{flex:1,height:1,background:"#E7E5E4"}}/>
         </div>
 
-        <button style={{background:"none",border:"2px solid #E7E5E4",borderRadius:12,cursor:"pointer",fontSize:13,fontWeight:600,color:"#57534E",fontFamily:"inherit",padding:"10px 16px",transition:"all .2s",display:"flex",alignItems:"center",justifyContent:"center",gap:6}} 
+        <button style={{background:"none",border:"2px solid #E7E5E4",borderRadius:12,cursor:"pointer",fontSize:13,fontWeight:600,color:"#57534E",fontFamily:"inherit",padding:"12px 16px",transition:"all .2s",display:"flex",alignItems:"center",justifyContent:"center",gap:6}} 
           onClick={()=>{setMode(m=>m==="login"?"register":"login");setErrors({});}}
           onMouseEnter={e=>e.currentTarget.style.borderColor="#E8590C"}
           onMouseLeave={e=>e.currentTarget.style.borderColor="#E7E5E4"}>
           {mode==="login"?<><$.User s={15} c="#E8590C"/> ¿No tenés cuenta? Registrate</>:<><$.Back s={15} c="#E8590C"/> Ya tengo cuenta</>}
         </button>
+
+        <div style={{fontSize:10,color:"#D6D3D1",textAlign:"center",marginTop:4}}>
+          Al registrarte aceptás los términos de uso y política de privacidad
+        </div>
       </div>
     </div>
   );
