@@ -735,7 +735,7 @@ export default function App() {
   const [pushNotifs, setPushNotifs] = useState([]);
   const [adoptionPets, setAdoptionPets] = useState([]);
   const [fosterOffers, setFosterOffers] = useState([]);
-  const [page, setPage] = useState("home"); // home|club|adoption|foster|vet|petid|community|market|petfit|petmatch|petshop
+  const [page, setPage] = useState("home"); // home|club|adoption|foster|vet|petid|community|shield|market|petfit|petmatch|petshop
   // Vet AI chat
   const [vetMessages, setVetMessages] = useState([]);
   const [vetInput, setVetInput] = useState("");
@@ -1030,15 +1030,17 @@ export default function App() {
         {/* Section nav bar */}
         <div style={{maxWidth:1100,margin:"6px auto 0",display:"flex",gap:6,overflowX:"auto",paddingBottom:2}}>
           {[
-            {k:"club",l:"Club PET $5",i:<$.Paw s={16}/>},
+            {k:"club",l:"Club us$5",i:<$.Paw s={16}/>},
             {k:"home",l:"Perdidos",i:<$.Search s={16}/>},
             {k:"vet",l:"Vet IA",i:<$.AI s={16}/>},
             {k:"petid",l:"ID + QR",i:<$.Scan s={16}/>},
             {k:"petfit",l:"PetFit",i:<$.Heart s={16}/>},
             {k:"petmatch",l:"PetMatch",i:<$.Sparkle s={16}/>},
+
             {k:"adoption",l:"Adopción",i:<$.Heart s={16}/>},
             {k:"foster",l:"Guarda",i:<$.Shield s={16}/>},
-            {k:"market",l:"Recursos útiles",i:<$.Star s={16}/>},
+            {k:"market",l:"Servicios",i:<$.Star s={16}/>},
+            {k:"shield",l:"Shield",i:<$.Shield s={16}/>},
             {k:"community",l:"Comunidad",i:<$.Paw s={16}/>},
           ].map(n=>(
             <button key={n.k} onClick={()=>{setPage(n.k);setSelectedPet(null);}} style={{
@@ -1085,7 +1087,7 @@ export default function App() {
                   onClick={()=>{if(requireAuth("activar rastreo"))setModal("register");}}>
                   <$.Cam s={22}/> Subir foto y activar rastreo
                 </button>
-                <div style={{fontSize:13,color:"#64748B",marginTop:12}}>Subir es gratis · Planes desde US$10/semana</div>
+                <div style={{fontSize:13,color:"#64748B",marginTop:12}}>Subir es gratis · Resultados desde US$20/semana</div>
               </div>
 
               <button style={{background:"rgba(255,255,255,.08)",border:"1px solid rgba(255,255,255,.15)",color:"#E2E8F0",borderRadius:12,padding:"10px 22px",fontWeight:600,fontSize:13,cursor:"pointer",fontFamily:"inherit",display:"inline-flex",alignItems:"center",gap:6,transition:"all .2s"}}
@@ -1140,25 +1142,23 @@ export default function App() {
                 <div style={{fontSize:10,fontWeight:700,color:"#FBBF24",letterSpacing:".08em",marginBottom:6}}>PLANES</div>
                 <div style={{fontSize:14,color:"#94A3B8"}}>Subir la foto es siempre gratis</div>
               </div>
-              <div style={{display:"grid",gridTemplateColumns:"1fr",gap:8}}>
+              <div style={{display:"flex",gap:8}}>
                 {[
-                  {name:"Plata",price:"US$10",period:"/sem",color:"#94A3B8",feats:["Exposición en PetFinder dentro del radio elegido","1 publicación por día","Visibilidad local en la plataforma","Contacto directo con quien reporte una coincidencia"]},
-                  {name:"Oro",price:"US$25",period:"/sem",color:"#D97706",pop:true,feats:["Todo Plata +","Mayor exposición en redes dentro del radio del mapa","Facebook + Instagram geolocalizados","Difusión optimizada y republicación automática"]},
-                  {name:"Platinum",price:"US$40",period:"/sem",color:"#7C3AED",premium:true,feats:["Todo Oro +","Barrido automático por patrones biométricos de IA","Rastreo inteligente en redes y publicaciones similares","Cruce automático con coincidencias visuales prioritarias"]},
+                  {name:"Búsqueda",price:"US$20",period:"/sem",color:"#E8590C",feats:["Resultados Face ID","Contacto directo","Alertas 7 días","Cruce en redes"]},
+                  {name:"Máxima",price:"US$50",period:"/sem",color:"#7C3AED",pop:true,feats:["Todo Búsqueda +","Reportes WhatsApp","Difusión en redes","Flyers + avisos auto","Republicación 48hs"]},
                 ].map((p,i)=>(
-                  <div key={i} style={{background:"rgba(255,255,255,.05)",borderRadius:14,padding:14,border:p.premium?"1px solid rgba(124,58,237,.35)":p.pop?"1px solid rgba(217,119,6,.35)":"1px solid rgba(255,255,255,.08)",position:"relative"}}>
-                    {p.pop&&<div style={{position:"absolute",top:-8,left:"50%",transform:"translateX(-50%)",background:"#D97706",color:"#fff",padding:"2px 10px",borderRadius:100,fontSize:8,fontWeight:800}}>RECOMENDADO</div>}
-                    {p.premium&&<div style={{position:"absolute",top:-8,left:"50%",transform:"translateX(-50%)",background:"#7C3AED",color:"#fff",padding:"2px 10px",borderRadius:100,fontSize:8,fontWeight:800}}>IA BIOMÉTRICA</div>}
+                  <div key={i} style={{flex:1,background:"rgba(255,255,255,.05)",borderRadius:14,padding:14,border:p.pop?"1px solid rgba(124,58,237,.3)":"1px solid rgba(255,255,255,.08)",position:"relative"}}>
+                    {p.pop&&<div style={{position:"absolute",top:-8,left:"50%",transform:"translateX(-50%)",background:"#7C3AED",color:"#fff",padding:"2px 10px",borderRadius:100,fontSize:8,fontWeight:800}}>RECOMENDADO</div>}
                     <div style={{fontWeight:800,fontSize:13,color:p.color}}>{p.name}</div>
                     <div style={{fontSize:22,fontWeight:800,color:"#fff",marginTop:2}}>{p.price}<span style={{fontSize:11,color:"#64748B"}}>{p.period}</span></div>
                     <div style={{marginTop:8}}>{p.feats.map((f,j)=><div key={j} style={{fontSize:10,color:"#94A3B8",marginBottom:3,display:"flex",alignItems:"center",gap:4}}><$.Check s={10} c={p.color}/>{f}</div>)}</div>
-                    <button className="bp" style={{width:"100%",justifyContent:"center",marginTop:10,padding:"9px",fontSize:11,background:p.color,borderRadius:10}} onClick={()=>setModal("premium")}>{p.premium?"Elegir Platinum":p.pop?"Elegir Oro":"Ver Plata"}</button>
+                    <button className="bp" style={{width:"100%",justifyContent:"center",marginTop:10,padding:"9px",fontSize:11,background:p.color,borderRadius:10}} onClick={()=>setModal("premium")}>{p.pop?"Elegir":"Ver más"}</button>
                   </div>
                 ))}
               </div>
-              <div onClick={()=>setPage("club")} style={{marginTop:12,padding:"10px 14px",background:"rgba(245,158,11,.10)",borderRadius:10,border:"1px solid rgba(245,158,11,.25)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-                <div style={{display:"flex",alignItems:"center",gap:6}}><$.Paw s={14} c="#F59E0B"/><span style={{fontSize:11,fontWeight:700,color:"#F59E0B"}}>Club PetFinder US$5/mes — prevención, QR, Vet IA y beneficios exclusivos</span></div>
-                <$.Arr s={14} c="#F59E0B"/>
+              <div onClick={()=>setPage("shield")} style={{marginTop:12,padding:"10px 14px",background:"rgba(5,150,105,.1)",borderRadius:10,border:"1px solid rgba(5,150,105,.2)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                <div style={{display:"flex",alignItems:"center",gap:6}}><$.Shield s={14} c="#4ADE80"/><span style={{fontSize:11,fontWeight:700,color:"#4ADE80"}}>Shield US$5/mes — Todo incluido preventivo</span></div>
+                <$.Arr s={14} c="#4ADE80"/>
               </div>
             </div>
           </section>
@@ -1174,10 +1174,10 @@ export default function App() {
                 </div>
                 <div>
                   <div style={{fontWeight:800,fontSize:17,color:"#92400E",letterSpacing:"-.02em"}}>PetFinder Club</div>
-                  <div style={{fontSize:12,color:"#A16207",lineHeight:1.4,marginTop:2}}>Hacé socio a tu mascota por us$5/mes. QR, Vet IA, ficha médica, PetMatch, Adopción, Guarda y recursos útiles.</div>
+                  <div style={{fontSize:12,color:"#A16207",lineHeight:1.4,marginTop:2}}>Hacé socio a tu mascota por us$5/mes. Vet IA, QR, ficha médica y todo listo si se pierde.</div>
                   <div style={{display:"flex",alignItems:"center",gap:6,marginTop:8}}>
                     <span style={{background:"#E8590C",color:"#fff",padding:"5px 14px",borderRadius:8,fontSize:12,fontWeight:700}}>us$5/mes</span>
-                    <span style={{fontSize:10,color:"#92400E",fontWeight:600}}>Prevención y beneficios todos los días</span>
+                    <span style={{fontSize:10,color:"#92400E",fontWeight:600}}>Menos que un café ☕</span>
                   </div>
                 </div>
               </div>
@@ -1191,10 +1191,9 @@ export default function App() {
                 {page:"vet",emoji:"🩺",name:"Vet IA",color:"#059669"},
                 {page:"petfit",emoji:"💪",name:"PetFit",color:"#10B981"},
                 {page:"petmatch",emoji:"❤️",name:"PetMatch",color:"#EC4899"},
-                {page:"adoption",emoji:"🏠",name:"Adopción",color:"#EF4444"},
-                {page:"foster",emoji:"🛡️",name:"Guarda",color:"#2563EB"},
+
                 {page:"petid",emoji:"📱",name:"ID + QR",color:"#2563EB"},
-                {page:"market",emoji:"🧰",name:"Recursos útiles",color:"#78716C"},
+                {page:"market",emoji:"🛒",name:"Servicios",color:"#78716C"},
               ].map((s,i)=>(
                 <div key={i} className="ch" onClick={()=>setPage(s.page)} style={{background:"#fff",borderRadius:12,padding:10,border:"1px solid #F5F5F4",cursor:"pointer",textAlign:"center",animation:`fadeIn .3s ease ${i*.04}s both`}}>
                   <div style={{fontSize:20,marginBottom:3}}>{s.emoji}</div>
@@ -1281,9 +1280,9 @@ export default function App() {
               <h2 style={{color:"#fff",fontSize:20,fontWeight:800,marginTop:12,letterSpacing:"-.03em"}}>Encontrá a tu mascota</h2>
               <p style={{color:"#A8A29E",fontSize:12,lineHeight:1.6,margin:"8px auto 6px",maxWidth:340}}>Subí la foto gratis. Desbloqueá resultados o difundí en redes sociales.</p>
               <div style={{display:"flex",gap:8,justifyContent:"center",marginBottom:16,flexWrap:"wrap"}}>
-                <span style={{color:"#FBBF24",fontSize:14,fontWeight:800}}>US$10 búsqueda</span>
+                <span style={{color:"#FBBF24",fontSize:14,fontWeight:800}}>US$20 búsqueda</span>
                 <span style={{color:"#A8A29E",fontSize:14}}>·</span>
-                <span style={{color:"#C084FC",fontSize:14,fontWeight:800}}>US$25 + redes</span>
+                <span style={{color:"#C084FC",fontSize:14,fontWeight:800}}>US$50 + redes</span>
               </div>
               <button className="bg" onClick={()=>setModal("premium")}><$.Zap s={14} c="#78350F"/> Ver planes</button>
             </div>
@@ -1560,8 +1559,8 @@ export default function App() {
 
           {/* Pricing */}
           <div style={{background:"#fff",borderRadius:16,border:"1px solid #F5F5F4",padding:16,textAlign:"center",marginBottom:16}}>
-            <div style={{fontWeight:800,fontSize:22,color:"#2563EB"}}>Incluido en Club PetFinder</div>
-            <p style={{fontSize:12,color:"#A8A29E",marginTop:4}}>ID Digital + Ficha Médica completa con tu suscripción Club PetFinder US$5/mes.</p>
+            <div style={{fontWeight:800,fontSize:22,color:"#2563EB"}}>Incluido en Shield</div>
+            <p style={{fontSize:12,color:"#A8A29E",marginTop:4}}>ID Digital + Ficha Médica completa con tu suscripción Shield US$5/mes.</p>
             <div style={{display:"flex",flexWrap:"wrap",gap:4,justifyContent:"center",marginTop:10}}>
               {["Perfil completo","QR descargable","Historial médico","Vacunas","Recordatorios","Alertas"].map((f,i)=>(
                 <span key={i} style={{background:"#2563EB08",color:"#2563EB",padding:"3px 10px",borderRadius:7,fontSize:11,fontWeight:600}}>{f}</span>
@@ -1819,9 +1818,9 @@ export default function App() {
               {[
                 {name:"PetFit",price:"+US$9.99",desc:"Tracker de salud diario con IA",color:"#10B981",emoji:"💪"},
 
-                {name:"Club PET",price:"US$5/mes",desc:"Prevención, QR y beneficios exclusivos",color:"#F59E0B",emoji:"🐾"},
-                {name:"Búsqueda",price:"US$10/sem",desc:"Exposición local dentro del radio elegido",color:"#E8590C",emoji:"🔍"},
-                {name:"Máxima",price:"US$25/sem",desc:"Exposición ampliada en redes según tu radio",color:"#7C3AED",emoji:"📢"},
+                {name:"Shield",price:"+US$5",desc:"Protocolo de emergencia completo",color:"#059669",emoji:"🛡️"},
+                {name:"Búsqueda",price:"US$20/sem",desc:"Face ID Tracker en caso de pérdida",color:"#E8590C",emoji:"🔍"},
+                {name:"Máxima",price:"US$50/sem",desc:"Difusión en redes + Reportes WhatsApp",color:"#7C3AED",emoji:"📢"},
               ].map((u,i)=>(
                 <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0",borderBottom:i<4?"1px solid #E7E5E4":"none"}}>
                   <div style={{display:"flex",alignItems:"center",gap:8}}>
@@ -1852,12 +1851,12 @@ export default function App() {
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
                 <div>
                   <div style={{fontSize:11,fontWeight:700,color:"#F87171",marginBottom:8}}>❌ SIN CLUB</div>
-                  {["No tenés datos cargados","Si se pierde, arrancás de cero","Sin ficha médica digital","Sin recordatorios","Pagás US$10-40 en la urgencia"].map((t,i)=>(
+                  {["No tenés datos cargados","Si se pierde, arrancás de cero","Sin ficha médica digital","Sin recordatorios","Pagás US$20-50 en la urgencia"].map((t,i)=>(
                     <div key={i} style={{fontSize:10,color:"#94A3B8",marginBottom:4}}>• {t}</div>
                   ))}
                 </div>
                 <div>
-                  <div style={{fontSize:11,fontWeight:700,color:"#4ADE80",marginBottom:8}}>✓ CON CLUB PETFINDER</div>
+                  <div style={{fontSize:11,fontWeight:700,color:"#4ADE80",marginBottom:8}}>✓ CON CLUB us$5</div>
                   {["Foto + perfil ya cargados","Face ID listo al instante","Ficha médica completa","Recordatorios automáticos","Todo preparado si pasa algo"].map((t,i)=>(
                     <div key={i} style={{fontSize:10,color:"#E2E8F0",marginBottom:4}}>• {t}</div>
                   ))}
@@ -1871,10 +1870,10 @@ export default function App() {
             <div style={{fontSize:11,fontWeight:700,color:"#A8A29E",letterSpacing:".06em",marginBottom:10}}>PREGUNTAS FRECUENTES</div>
             {[
               {q:"¿Puedo cancelar cuando quiera?",a:"Sí, sin permanencia. Cancelás desde tu perfil en cualquier momento."},
-              {q:"¿Incluye la búsqueda si se pierde?",a:"El Club te deja todo preparado. Si se pierde, activás Plata (US$10), Oro (US$25) o Platinum (US$40) sin perder tiempo."},
+              {q:"¿Incluye la búsqueda si se pierde?",a:"El Club te deja todo preparado. Si se pierde, activás la búsqueda (US$20) o difusión (US$50) con un toque, sin perder tiempo."},
               {q:"¿El QR funciona si alguien no tiene la app?",a:"Sí. El QR abre una página web con tus datos de contacto. No necesitan tener PetFinder."},
               {q:"¿Puedo registrar más de una mascota?",a:"Sí, cada mascota adicional cuesta US$1.50/mes extra."},
-              {q:"¿Puedo buscar servicios pet desde la app?",a:"Sí, en la sección Recursos útiles tenés accesos rápidos para buscar veterinarias, petshops, paseadores y más cerca tuyo."},
+              {q:"¿Puedo buscar servicios pet desde la app?",a:"Sí, en la sección Servicios tenés accesos rápidos para buscar veterinarias, petshops, paseadores y más cerca tuyo."},
             ].map((f,i)=>(
               <div key={i} style={{background:"#fff",borderRadius:12,border:"1px solid #F5F5F4",padding:14,marginBottom:8}}>
                 <div style={{fontWeight:700,fontSize:13,marginBottom:4}}>{f.q}</div>
@@ -1882,6 +1881,91 @@ export default function App() {
               </div>
             ))}
           </section>
+        </div>
+      )}
+
+      {/* ═══ SHIELD PAGE ═══ */}
+      {!selectedPet && page==="shield" && (
+        <div style={{animation:"fadeIn .5s",maxWidth:600,margin:"0 auto",padding:"0 14px"}}>
+          <section style={{padding:"32px 0 20px",textAlign:"center"}}>
+            <div style={{width:64,height:64,borderRadius:18,margin:"0 auto 14px",background:"linear-gradient(135deg,#059669,#0D9488)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 8px 30px rgba(5,150,105,.25)"}}>
+              <$.Shield s={32} c="#fff"/>
+            </div>
+            <div style={{display:"inline-flex",alignItems:"center",gap:4,background:"#05966910",padding:"4px 12px",borderRadius:100,fontSize:10,fontWeight:700,color:"#059669",marginBottom:10,letterSpacing:".06em"}}>PROTECCIÓN PREVENTIVA</div>
+            <h1 style={{fontFamily:"'Fraunces',serif",fontSize:"clamp(26px,6vw,40px)",fontWeight:800,lineHeight:1.08,letterSpacing:"-.03em",marginBottom:8}}>
+              PetFinder <span style={{background:"linear-gradient(135deg,#059669,#0D9488)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>Shield</span>
+            </h1>
+            <p style={{fontSize:14,color:"#78716C",lineHeight:1.6,maxWidth:420,margin:"0 auto 8px"}}>
+              El seguro preventivo para tu mascota. Pagás poco, dormís tranquilo.
+            </p>
+            <div style={{display:"flex",alignItems:"baseline",justifyContent:"center",gap:4,marginBottom:20}}>
+              <span style={{fontSize:36,fontWeight:800,color:"#059669"}}>US$5</span>
+              <span style={{fontSize:15,color:"#A8A29E"}}>/mes</span>
+            </div>
+          </section>
+
+          {/* What happens when you lose your pet */}
+          <div style={{background:"linear-gradient(135deg,#1C1917,#292524)",borderRadius:18,padding:20,marginBottom:16,position:"relative",overflow:"hidden"}}>
+            <div style={{position:"absolute",top:-20,right:-20,width:80,height:80,borderRadius:"50%",background:"rgba(5,150,105,.1)"}}/>
+            <div style={{fontSize:11,fontWeight:700,color:"#059669",letterSpacing:".06em",marginBottom:14}}>SIN SHIELD vs CON SHIELD</div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+              <div>
+                <div style={{fontSize:11,fontWeight:700,color:"#DC2626",marginBottom:8}}>❌ SIN SHIELD</div>
+                {["Pánico, no sabés qué hacer","Subís foto apurado","Pagás US$20 en la urgencia","Esperás resultados","Perdés tiempo valioso"].map((t,i)=>(
+                  <div key={i} style={{fontSize:11,color:"#A8A29E",marginBottom:4,display:"flex",gap:4}}><span style={{color:"#DC2626"}}>•</span>{t}</div>
+                ))}
+              </div>
+              <div>
+                <div style={{fontSize:11,fontWeight:700,color:"#059669",marginBottom:8}}>✓ CON SHIELD</div>
+                {["La IA ya tiene todo listo","Se activa en 1 toque","No pagás extra en la crisis","Radar + alertas inmediatas","Difusión automática activa"].map((t,i)=>(
+                  <div key={i} style={{fontSize:11,color:"#D6D3D1",marginBottom:4,display:"flex",gap:4}}><span style={{color:"#059669"}}>•</span>{t}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Features */}
+          <div style={{background:"#fff",borderRadius:18,border:"2px solid #05966930",padding:18,marginBottom:16}}>
+            <div style={{fontSize:11,fontWeight:700,color:"#059669",letterSpacing:".06em",marginBottom:12}}>¿QUÉ INCLUYE TU SHIELD?</div>
+            {[
+              {i:<$.Scan s={16}/>,t:"ID Digital + QR activo",d:"Perfil completo con QR para el collar. Si alguien lo escanea, te contacta al instante."},
+              {i:<$.AI s={16}/>,t:"IA pre-analizada",d:"La foto de tu mascota ya está procesada. Si se pierde, el matching es inmediato."},
+              {i:<$.Zap s={16}/>,t:"Protocolo de emergencia",d:"Un toque y se activa: alertas en la zona, radar en redes, difusión automática. Sin pagar US$20 ni US$50."},
+              {i:<$.Search s={16}/>,t:"Radar semanal preventivo",d:"Cada semana la IA busca en redes por si apareció una mascota similar a la tuya publicada."},
+              {i:<$.AI s={16}/>,t:"Veterinario IA Premium",d:"Historial médico guardado, recordatorio de vacunas, alertas de salud personalizadas."},
+              {i:<$.Bell s={16}/>,t:"Alertas en la zona",d:"Si alguien reporta una mascota encontrada cerca tuyo, te avisamos al instante."},
+              {i:<$.Star s={16}/>,t:"Mayor visibilidad en búsqueda",d:"Tu mascota aparece con prioridad en las alertas de la zona. Más chances de ser encontrada."},
+              {i:<$.Heart s={16}/>,t:"Reporte mensual IA",d:"Cada mes recibís un reporte de salud basado en lo que consultaste al veterinario IA."},
+            ].map((f,i)=>(
+              <div key={i} style={{display:"flex",gap:10,marginBottom:i<7?12:0,alignItems:"flex-start"}}>
+                <div style={{width:32,height:32,borderRadius:9,background:"#05966908",display:"flex",alignItems:"center",justifyContent:"center",color:"#059669",flexShrink:0,marginTop:2}}>{f.i}</div>
+                <div><div style={{fontWeight:700,fontSize:13}}>{f.t}</div><div style={{fontSize:11,color:"#A8A29E",lineHeight:1.4}}>{f.d}</div></div>
+              </div>
+            ))}
+          </div>
+
+          {/* Pricing comparison */}
+          <div style={{background:"#FAFAF9",borderRadius:16,padding:16,marginBottom:16}}>
+            <div style={{fontSize:11,fontWeight:700,color:"#A8A29E",letterSpacing:".06em",marginBottom:10}}>COMPARÁ EL COSTO</div>
+            <div style={{display:"flex",flexDirection:"column",gap:8}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 12px",background:"#DC262608",borderRadius:10}}>
+                <span style={{fontSize:12,color:"#57534E"}}>Sin Shield, cuando perdés tu mascota</span>
+                <span style={{fontSize:14,fontWeight:800,color:"#DC2626"}}>US$20-50</span>
+              </div>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 12px",background:"#05966908",borderRadius:10,border:"1px solid #05966920"}}>
+                <span style={{fontSize:12,color:"#057A55",fontWeight:600}}>Con Shield, todo incluido</span>
+                <span style={{fontSize:14,fontWeight:800,color:"#059669"}}>US$5/mes</span>
+              </div>
+              <div style={{textAlign:"center",fontSize:11,color:"#059669",fontWeight:700,marginTop:2}}>Ahorrás hasta US$45 en la emergencia</div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <button className="bp" style={{width:"100%",justifyContent:"center",padding:"16px 24px",fontSize:16,background:"linear-gradient(135deg,#059669,#0D9488)",marginBottom:10,borderRadius:16}}
+            onClick={()=>{if(requireAuth("activar Shield"))setModal("premium");}}>
+            <$.Shield s={18}/> Activar Shield por US$5/mes
+          </button>
+          <p style={{textAlign:"center",fontSize:10,color:"#D6D3D1",marginBottom:32}}>Cancelá cuando quieras. Sin compromiso. Tu mascota protegida.</p>
         </div>
       )}
 
@@ -2356,7 +2440,7 @@ export default function App() {
                 </p>
 
                 <div style={{display:"flex",alignItems:"baseline",justifyContent:"center",gap:4,marginBottom:14}}>
-                  <span style={{fontSize:36,fontWeight:800,color:"#fff"}}>US$10</span>
+                  <span style={{fontSize:36,fontWeight:800,color:"#fff"}}>US$20</span>
                   <span style={{fontSize:14,color:"#A8A29E"}}>/7 días</span>
                 </div>
 
@@ -2370,10 +2454,10 @@ export default function App() {
 
                 <div style={{display:"flex",flexDirection:"column",gap:8}}>
                   <button className="bp" style={{width:"100%",justifyContent:"center",padding:"14px 24px",fontSize:15}} onClick={()=>setModal("premium")}>
-                    <$.Zap s={16}/> US$10 — Planes de difusión
+                    <$.Zap s={16}/> US$20 — Desbloquear resultados
                   </button>
                   <button className="bp" style={{width:"100%",justifyContent:"center",padding:"14px 24px",fontSize:14,background:"linear-gradient(135deg,#7C3AED,#2563EB)"}} onClick={()=>setModal("premium")}>
-                    <$.Zap s={16}/> US$25 — exposición ampliada en redes
+                    <$.Zap s={16}/> US$50 — Resultados + difusión en redes
                   </button>
                 </div>
               </div>
@@ -2684,14 +2768,15 @@ export default function App() {
               {l:"Veterinario IA 24/7",i:<$.AI s={16} c="#059669"/>,fn:()=>{setPage("vet");setSelectedPet(null);setModal(null);}},
               {l:"ID Digital + QR",i:<$.Scan s={16} c="#7C3AED"/>,fn:()=>{setPage("petid");setSelectedPet(null);setModal(null);}},
               {l:"Comunidad",i:<$.Paw s={16} c="#F59E0B"/>,fn:()=>{setPage("community");setSelectedPet(null);setModal(null);}},
-                            {l:"Recursos útiles",i:<$.Star s={16} c="#F59E0B"/>,fn:()=>{setPage("market");setSelectedPet(null);setModal(null);}},
+              {l:"Shield US$5/mes",i:<$.Shield s={16} c="#059669"/>,fn:()=>{setPage("shield");setSelectedPet(null);setModal(null);}},
+              {l:"Servicios Pet",i:<$.Star s={16} c="#F59E0B"/>,fn:()=>{setPage("market");setSelectedPet(null);setModal(null);}},
               {l:"PetFit — Salud diaria",i:<$.Heart s={16} c="#10B981"/>,fn:()=>{setPage("petfit");setSelectedPet(null);setModal(null);}},
               {l:"PetMatch — Conectá",i:<$.Sparkle s={16} c="#EC4899"/>,fn:()=>{setPage("petmatch");setSelectedPet(null);setModal(null);}},
 
               {l:"Asistente IA",i:<$.Sparkle s={16}/>,fn:()=>setModal("ai-chat")},
               ...(!currentUser?[{l:"Iniciar sesión",i:<$.User s={16}/>,fn:()=>setModal("auth"),accent:true}]:
                 [{l:"Cerrar sesión",i:<$.Back s={16}/>,fn:handleLogout,danger:true}]),
-              {l:"Planes Plata / Oro / Platinum",i:<$.Zap s={16}/>,fn:()=>setModal("premium")},
+              {l:"Planes US$20 / US$50",i:<$.Zap s={16}/>,fn:()=>setModal("premium")},
             ].map((item,i)=>(
               <button key={i} onClick={item.fn} style={{display:"flex",alignItems:"center",gap:10,width:"100%",padding:"11px 12px",borderRadius:11,border:"none",background:"transparent",cursor:"pointer",fontSize:13,fontWeight:600,color:item.danger?"#DC2626":item.accent?"#E8590C":"#44403C",fontFamily:"inherit",textAlign:"left",transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background="#FAFAF9"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
                 <span style={{color:item.danger?"#DC2626":"#E8590C"}}>{item.i}</span>{item.l}
@@ -2720,7 +2805,7 @@ function MapRadius({ lat, lng, radiusKm, onLocationChange, exposureTier }) {
   const mapInstanceRef = useRef(null);
   const markerRef = useRef(null);
   const circleRef = useRef(null);
-  const tierColor = exposureTier==="platinum"||exposureTier==="platino"?"#7C3AED":exposureTier==="oro"?"#D97706":"#94A3B8";
+  const tierColor = exposureTier==="platinum"?"#7C3AED":exposureTier==="oro"?"#D97706":"#94A3B8";
 
   useEffect(()=>{
     if(!mapRef.current||typeof window==="undefined"||!window.L) return;
@@ -2968,7 +3053,7 @@ function PetForm({title,sub,type,onSubmit,onClose,analyzePhoto,analyzingPhoto,an
             onLocationChange={(lat,lng,addr)=>setD(p=>({...p,location:{lat,lng,address:addr||p.location.address}}))}
             exposureTier={d.exposureTier}
           />
-          <div style={{fontSize:10,color:"#A8A29E",marginTop:6,textAlign:"center"}}>Tocá el mapa para mover el pin · Elegís dónde poner el círculo y el tamaño de la difusión</div>
+          <div style={{fontSize:10,color:"#A8A29E",marginTop:6,textAlign:"center"}}>Tocá el mapa para mover el pin · El círculo muestra el alcance de la difusión</div>
         </div>
 
         {/* EXPOSURE TIER SELECTOR - Plata / Oro / Platinum */}
@@ -2977,18 +3062,18 @@ function PetForm({title,sub,type,onSubmit,onClose,analyzePhoto,analyzingPhoto,an
             <label style={{fontSize:11,fontWeight:700,color:"#78716C",letterSpacing:".04em",marginBottom:8,display:"block"}}>NIVEL DE EXPOSICIÓN EN REDES</label>
             <div style={{display:"flex",flexDirection:"column",gap:8}}>
               {[
-                {key:"plata",name:"Plata",price:"US$10/sem",color:"#94A3B8",bg:"#94A3B808",border:"#94A3B830",
-                  badge:"🥈",freq:"Cada 24hs",reach:"Exposición local",
-                  desc:"Exposición básica en PetFinder y redes dentro del radio exacto que marcaste en el mapa. Ideal para empezar la búsqueda.",
-                  feats:["Publicación en la plataforma","Exposición local según el radio","1 impulso por día","Contacto directo","Difusión básica en redes"]},
-                {key:"oro",name:"Oro",price:"US$25/sem",color:"#D97706",bg:"#D9770608",border:"#D97706",popular:true,
-                  badge:"🥇",freq:"Cada 12hs",reach:"Exposición ampliada",
-                  desc:"Mayor exposición en redes dentro del radio que marcaste en el mapa. Facebook e Instagram geolocalizados para la zona elegida.",
-                  feats:["Todo Plata +","Facebook e Instagram en tu radio","Mayor frecuencia de publicación","Flyer optimizado","WhatsApp barrial","Republicación cada 12hs"]},
-                {key:"platinum",name:"Platinum",price:"US$40/sem",color:"#7C3AED",bg:"#7C3AED08",border:"#7C3AED",
-                  badge:"💎",freq:"Barrido IA",reach:"Biometría + redes",
-                  desc:"Incluye todo Oro y además un rastreo por patrones biométricos de IA: barrido automático en redes para detectar coincidencias visuales de tu mascota.",
-                  feats:["Todo Oro +","Rastreo biométrico automático","Barrido visual en redes y publicaciones","Cruce por patrones de rostro, pelaje y marcas","Coincidencias IA prioritarias","Reporte diario de hallazgos"]},
+                {key:"plata",name:"Plata",price:"US$20/sem",color:"#94A3B8",bg:"#94A3B808",border:"#94A3B830",
+                  badge:"🥈",freq:"Cada 24hs",reach:"5K personas",
+                  desc:"Publicamos tu anuncio en el feed de PetFinder para usuarios dentro de tu radio. Ideal para empezar la búsqueda.",
+                  feats:["Anuncio en plataforma PetFinder","Visible para usuarios en tu radio","Alerta push a vecinos","1 publicación por día","Resultados IA + contacto directo"]},
+                {key:"oro",name:"Oro",price:"US$50/sem",color:"#D97706",bg:"#D9770608",border:"#D97706",popular:true,
+                  badge:"🥇",freq:"Cada 12hs",reach:"50K personas",
+                  desc:"Anuncios pagos en Facebook e Instagram geolocalizados exactamente en el radio que marcaste en el mapa. La gente que está AHORA en esa zona ve tu mascota.",
+                  feats:["Todo Plata +","Anuncios Facebook Ads en tu radio","Anuncios Instagram en tu zona","Grupos WhatsApp barriales","Flyer profesional auto-generado","Republicación cada 12hs","Hashtags + geotags optimizados"]},
+                {key:"platinum",name:"Platinum",price:"US$79/sem",color:"#7C3AED",bg:"#7C3AED08",border:"#7C3AED",
+                  badge:"💎",freq:"Cada 6hs",reach:"200K+ personas",
+                  desc:"Máxima exposición: anuncios pagos en TODAS las redes geolocalizados en tu radio + alertas a refugios y veterinarias. Como pegar 10.000 afiches digitales.",
+                  feats:["Todo Oro +","TikTok + X + Telegram + Nextdoor","Alerta a refugios y vets en 20km","Anuncios en clasificados locales","Republicación cada 6hs","Reporte de alcance diario","Posición #1 destacada en feed","Contacto prioritario 24/7"]},
               ].map(tier=>(
                 <div key={tier.key} onClick={()=>up("exposureTier",tier.key)} style={{
                   border:d.exposureTier===tier.key?`2px solid ${tier.color}`:`2px solid ${tier.border||"#E7E5E4"}`,
@@ -3040,7 +3125,7 @@ function PetForm({title,sub,type,onSubmit,onClose,analyzePhoto,analyzingPhoto,an
           {d.location.address&&<div style={{display:"flex",alignItems:"center",gap:4,marginTop:8,fontSize:11,color:"#2563EB"}}><$.Pin s={12} c="#2563EB"/> {d.location.address} · Radio {d.alertRadius}</div>}
           {type==="lost"&&d.exposureTier&&(
             <div style={{display:"flex",alignItems:"center",gap:4,marginTop:6,fontSize:11,fontWeight:700,color:d.exposureTier==="plata"?"#94A3B8":d.exposureTier==="oro"?"#D97706":"#7C3AED"}}>
-              {d.exposureTier==="plata"?"🥈":d.exposureTier==="oro"?"🥇":"💎"} Exposición {d.exposureTier.charAt(0).toUpperCase()+d.exposureTier.slice(1)} · {d.exposureTier==="plata"?"US$10":d.exposureTier==="oro"?"US$25":"US$40"}/sem
+              {d.exposureTier==="plata"?"🥈":d.exposureTier==="oro"?"🥇":"💎"} Exposición {d.exposureTier.charAt(0).toUpperCase()+d.exposureTier.slice(1)} · {d.exposureTier==="plata"?"US$20":d.exposureTier==="oro"?"US$50":"US$79"}/sem
             </div>
           )}
         </div>
@@ -3086,10 +3171,10 @@ const SUBSCRIPTION = {
     "Renovación cada 7 días",
   ],
   free: [
-    "Subir una mascota encontrada a la plataforma (gratis)",
-    "Compartir hallazgos y ayudar a reencontrar dueños (gratis)",
-    "Ver coincidencias básicas dentro de la plataforma",
-    "Acceso a la comunidad solidaria",
+    "Subir foto de mascota perdida (gratis)",
+    "Subir foto de mascota encontrada (gratis)",
+    "Ver el escaneo IA en acción (gratis)",
+    "Ver tu mascota publicada (gratis)",
   ],
 };
 
@@ -3120,7 +3205,7 @@ function PremiumFlow({ currentUser, onSelectPlan, onClose }) {
           {active?<$.Check s={28} c="#fff"/>:<$.Zap s={28} c="#fff"/>}
         </div>
         <h3 style={{fontSize:22,fontWeight:800,letterSpacing:"-.03em"}}>
-          {active?"Suscripción activa":"Planes de difusión"}
+          {active?"Suscripción activa":"Desbloquear resultados"}
         </h3>
         {active?(
           <p style={{fontSize:13,color:"#059669",fontWeight:700,marginTop:6}}>
@@ -3128,7 +3213,7 @@ function PremiumFlow({ currentUser, onSelectPlan, onClose }) {
           </p>
         ):(
           <p style={{fontSize:12,color:"#A8A29E",marginTop:6}}>
-            Elegí tu nivel de difusión semanal
+            Pagá una vez, accedé 7 días completos
           </p>
         )}
       </div>
@@ -3154,10 +3239,10 @@ function PremiumFlow({ currentUser, onSelectPlan, onClose }) {
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
           <div>
             <div style={{fontWeight:800,fontSize:16,color:active?"#059669":"#E8590C"}}>
-              {active?"Plan activo":"Plan Plata"}
+              {active?"Plan activo":"Suscripción semanal"}
             </div>
             <div style={{display:"flex",alignItems:"baseline",gap:4,marginTop:2}}>
-              <span style={{fontSize:32,fontWeight:800,letterSpacing:"-.04em"}}>US$10</span>
+              <span style={{fontSize:32,fontWeight:800,letterSpacing:"-.04em"}}>US$20</span>
               <span style={{fontSize:13,color:"#A8A29E",fontWeight:600}}>/7 días</span>
             </div>
           </div>
@@ -3177,21 +3262,21 @@ function PremiumFlow({ currentUser, onSelectPlan, onClose }) {
 
         {!active?(
           <button className="bp" style={{width:"100%",justifyContent:"center",marginTop:14,padding:"14px 24px",fontSize:15}}
-            onClick={()=>onSelectPlan({key:"plata",n:"Plan Plata",price:10,finalPrice:10,finalPeriod:"semana",billing:"weekly",c:"#94A3B8",fs:["Exposición local según tu radio","Publicación en la plataforma","1 impulso por día","Contacto directo"]})}>
-            <$.Zap s={16}/> Elegir Plata por US$10
+            onClick={()=>onSelectPlan({key:"weekly",n:"Búsqueda Básica",price:20,finalPrice:20,finalPeriod:"semana",billing:"weekly",c:"#E8590C",fs:SUBSCRIPTION.includes})}>
+            <$.Zap s={16}/> Suscribirme por US$20
           </button>
         ):(
           <div style={{marginTop:14,textAlign:"center"}}>
             <div style={{fontSize:12,color:"#78716C"}}>Expira el {new Date(new Date(currentUser.subscribedAt).getTime()+7*24*60*60*1000).toLocaleDateString("es-AR")}</div>
             <button className="bo" style={{marginTop:8,width:"100%",justifyContent:"center"}}
-              onClick={()=>onSelectPlan({key:"plata",n:"Plan Plata",price:10,finalPrice:10,finalPeriod:"semana",billing:"weekly",c:"#94A3B8",fs:["Exposición local según tu radio","Publicación en la plataforma","1 impulso por día","Contacto directo"]})}>
+              onClick={()=>onSelectPlan({key:"weekly",n:"Búsqueda Básica",price:20,finalPrice:20,finalPeriod:"semana",billing:"weekly",c:"#E8590C",fs:SUBSCRIPTION.includes})}>
               Renovar ahora
             </button>
           </div>
         )}
       </div>
 
-      {/* ═══ PLAN ORO — EXPOSICIÓN AMPLIADA ═══ */}
+      {/* ═══ PLAN US$50 — MÁXIMA EXPOSICIÓN ═══ */}
       <div style={{
         background:"linear-gradient(135deg,#7C3AED08,#2563EB08)",
         border:currentUser?.plan==="boost"?"2px solid #059669":"2px solid #7C3AED",
@@ -3207,12 +3292,12 @@ function PremiumFlow({ currentUser, onSelectPlan, onClose }) {
         
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:8,marginBottom:14}}>
           <div>
-            <div style={{fontWeight:800,fontSize:16,color:"#7C3AED"}}>Plan Oro</div>
+            <div style={{fontWeight:800,fontSize:16,color:"#7C3AED"}}>Difusión en Redes</div>
             <div style={{display:"flex",alignItems:"baseline",gap:4,marginTop:2}}>
-              <span style={{fontSize:32,fontWeight:800,letterSpacing:"-.04em"}}>US$25</span>
+              <span style={{fontSize:32,fontWeight:800,letterSpacing:"-.04em"}}>US$50</span>
               <span style={{fontSize:13,color:"#A8A29E",fontWeight:600}}>/7 días</span>
             </div>
-            <div style={{fontSize:11,color:"#7C3AED",fontWeight:600,marginTop:2}}>Incluye exposición ampliada según el radio elegido +</div>
+            <div style={{fontSize:11,color:"#7C3AED",fontWeight:600,marginTop:2}}>Incluye todo el plan de US$20 +</div>
           </div>
         </div>
 
@@ -3288,9 +3373,9 @@ function PremiumFlow({ currentUser, onSelectPlan, onClose }) {
 
         <button className="bp" style={{width:"100%",justifyContent:"center",marginTop:14,padding:"14px 24px",fontSize:15,background:"linear-gradient(135deg,#7C3AED,#2563EB)"}}
           onClick={()=>onSelectPlan({key:"boost",n:"Máxima Exposición",price:50,finalPrice:50,finalPeriod:"semana",billing:"weekly",c:"#7C3AED",
-            fs:["Todo el plan Plata (US$10)","Publicación en Instagram, Facebook, X, TikTok","Difusión WhatsApp, Telegram, grupos vecinales","Flyer profesional auto-generado","Republicación cada 48hs","Reporte de alcance","Alerta a refugios y veterinarias","Contacto prioritario"]
+            fs:["Todo el plan Búsqueda (US$20)","Publicación en Instagram, Facebook, X, TikTok","Difusión WhatsApp, Telegram, grupos vecinales","Flyer profesional auto-generado","Republicación cada 48hs","Reporte de alcance","Alerta a refugios y veterinarias","Contacto prioritario"]
           })}>
-          <$.Zap s={16}/> Plan Oro US$25
+          <$.Zap s={16}/> Máxima Exposición US$50
         </button>
       </div>
 
@@ -3300,8 +3385,8 @@ function PremiumFlow({ currentUser, onSelectPlan, onClose }) {
         {[
           {n:"1",t:"Subí la foto gratis",d:"Registrá tu mascota perdida o encontrada sin costo."},
           {n:"2",t:"La IA escanea",d:"Ves el reconocimiento en acción y tu mascota publicada."},
-          {n:"3",t:"US$10 → Plan Plata",d:"Desbloqueá coincidencias, contactos y alertas por 7 días."},
-          {n:"4",t:"US$25 → Plan Oro",d:"Difusión automática en Instagram, Facebook, X, TikTok, WhatsApp y más."},
+          {n:"3",t:"US$20 → Resultados",d:"Desbloqueá coincidencias, contactos y alertas por 7 días."},
+          {n:"4",t:"US$50 → Redes sociales",d:"Difusión automática en Instagram, Facebook, X, TikTok, WhatsApp y más."},
         ].map((s,i)=>(
           <div key={i} style={{display:"flex",gap:10,marginBottom:i<3?10:0}}>
             <div style={{width:24,height:24,borderRadius:7,background:i<3?"#E8590C":"#7C3AED",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,color:"#fff",flexShrink:0}}>{s.n}</div>
@@ -3318,14 +3403,14 @@ function PremiumFlow({ currentUser, onSelectPlan, onClose }) {
         <div style={{fontSize:10,fontWeight:700,color:"#A8A29E",letterSpacing:".06em",marginBottom:10}}>COMPARAR PLANES</div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
           <div style={{background:"#fff",borderRadius:10,padding:10,border:"1px solid #E8590C30",textAlign:"center"}}>
-            <div style={{fontSize:18,fontWeight:800,color:"#E8590C"}}>US$10</div>
+            <div style={{fontSize:18,fontWeight:800,color:"#E8590C"}}>US$20</div>
             <div style={{fontSize:10,color:"#A8A29E",fontWeight:600}}>/ semana</div>
             <div style={{fontSize:11,fontWeight:700,color:"#57534E",marginTop:6}}>Búsqueda</div>
             <div style={{fontSize:10,color:"#A8A29E",lineHeight:1.4,marginTop:2}}>IA + contactos + alertas</div>
           </div>
           <div style={{background:"#fff",borderRadius:10,padding:10,border:"1px solid #7C3AED30",textAlign:"center",position:"relative"}}>
             <div style={{position:"absolute",top:-6,right:8,background:"#7C3AED",color:"#fff",padding:"1px 8px",borderRadius:6,fontSize:8,fontWeight:800}}>RECOMENDADO</div>
-            <div style={{fontSize:18,fontWeight:800,color:"#7C3AED"}}>US$25</div>
+            <div style={{fontSize:18,fontWeight:800,color:"#7C3AED"}}>US$50</div>
             <div style={{fontSize:10,color:"#A8A29E",fontWeight:600}}>/ semana</div>
             <div style={{fontSize:11,fontWeight:700,color:"#57534E",marginTop:6}}>Máxima Exposición</div>
             <div style={{fontSize:10,color:"#A8A29E",lineHeight:1.4,marginTop:2}}>Todo + redes sociales</div>
