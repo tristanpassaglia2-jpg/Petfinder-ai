@@ -1143,45 +1143,115 @@ export default function App() {
               </div>
 
               {/* WhatsApp CTA */}
-              <button onClick={()=>window.open("https://wa.me/5491155551234?text=Hola!%20Quiero%20reportar%20una%20mascota%20en%20PetFinder%20AI","_blank")} style={{
+              <a href="https://wa.me/5491155551234?text=Hola!%20Quiero%20reportar%20una%20mascota%20en%20PetFinder%20AI" target="_blank" rel="noopener noreferrer" style={{
                 width:"100%",padding:"16px 20px",borderRadius:14,border:"none",
                 background:"linear-gradient(135deg,#25D366,#128C7E)",color:"#fff",
                 cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:10,
                 fontFamily:"inherit",fontWeight:700,fontSize:15,boxShadow:"0 4px 20px rgba(37,211,102,.3)",
-                transition:"all .2s",
+                transition:"all .2s",textDecoration:"none",
               }}>
                 <svg width={22} height={22} viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 Reportar por WhatsApp
-              </button>
+              </a>
+              {/* WhatsApp Bot explanation */}
+              <div style={{marginTop:10,padding:"10px 14px",background:"rgba(37,211,102,.08)",borderRadius:10,border:"1px solid rgba(37,211,102,.2)"}}>
+                <div style={{fontSize:11,fontWeight:700,color:"#128C7E",marginBottom:4}}>¿Cómo funciona el bot?</div>
+                <div style={{fontSize:10,color:"#166534",lineHeight:1.5}}>
+                  1️⃣ Mandás la foto → 2️⃣ El bot te pide zona → 3️⃣ La IA busca coincidencias → 4️⃣ Te manda el link para reportar oficialmente<br/>
+                  <strong>Socios Club:</strong> reciben alertas automáticas cuando la IA detecta una mascota similar en su zona.
+                </div>
+              </div>
             </div>
           </section>
 
           {/* ═══ PETFINDER TV — YOUTUBE ═══ */}
           <section style={{padding:"0 14px 24px",maxWidth:640,margin:"0 auto"}}>
             <div style={{background:"#fff",borderRadius:18,border:"1px solid #E7E5E4",overflow:"hidden"}}>
-              <div style={{background:"linear-gradient(135deg,#DC2626,#EF4444)",padding:"18px 18px 14px",display:"flex",alignItems:"center",gap:10}}>
-                <svg width={32} height={32} viewBox="0 0 24 24" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="#DC2626" points="9.545 15.568 15.818 12 9.545 8.432"/></svg>
-                <div><div style={{fontWeight:800,fontSize:18,color:"#fff"}}>PetFinder TV</div><div style={{fontSize:11,color:"#FECACA"}}>Canal YouTube oficial</div></div>
-              </div>
-              <div style={{padding:16}}>
-                <div style={{fontSize:13,color:"#57534E",lineHeight:1.6,marginBottom:14}}>Cada mascota reportada se convierte en un video con foto, datos, zona y contacto. Los usuarios también suben avistamientos.</div>
-                <div style={{background:"#0F172A",borderRadius:14,padding:20,marginBottom:14,position:"relative",overflow:"hidden"}}>
-                  <div style={{position:"absolute",top:8,right:8,background:"#DC2626",color:"#fff",padding:"2px 8px",borderRadius:4,fontSize:9,fontWeight:800}}>EN VIVO</div>
-                  <div style={{textAlign:"center"}}><div style={{fontSize:36,marginBottom:8}}>🐕</div><div style={{fontWeight:800,fontSize:14,color:"#fff"}}>MAX — Golden Retriever perdido</div><div style={{fontSize:11,color:"#94A3B8",marginTop:4}}>Palermo, Buenos Aires · Visto hace 2 días</div></div>
+              {/* Header */}
+              <div style={{background:"linear-gradient(135deg,#DC2626,#EF4444)",padding:"18px 18px 14px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                <div style={{display:"flex",alignItems:"center",gap:10}}>
+                  <svg width={32} height={32} viewBox="0 0 24 24" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="#DC2626" points="9.545 15.568 15.818 12 9.545 8.432"/></svg>
+                  <div><div style={{fontWeight:800,fontSize:18,color:"#fff"}}>PetFinder TV</div><div style={{fontSize:11,color:"#FECACA"}}>Canal YouTube oficial · Contenido automático</div></div>
                 </div>
+                <div style={{display:"flex",alignItems:"center",gap:4,background:"rgba(0,0,0,.25)",padding:"4px 8px",borderRadius:6}}>
+                  <div style={{width:6,height:6,borderRadius:3,background:"#FF4444",animation:"pulse 1.5s infinite"}}/>
+                  <span style={{fontSize:9,color:"#fff",fontWeight:700}}>EN VIVO</span>
+                </div>
+              </div>
+
+              {/* Video mockup */}
+              <div style={{position:"relative",background:"#0F172A",aspectRatio:"16/9",display:"flex",alignItems:"center",justifyContent:"center",overflow:"hidden"}}>
+                <div style={{position:"absolute",inset:0,background:"linear-gradient(135deg,#1E293B,#0F172A)"}}/>
+                <div style={{position:"relative",zIndex:1,textAlign:"center",padding:20}}>
+                  <div style={{width:64,height:64,borderRadius:16,background:"linear-gradient(135deg,hsl(30,42%,85%),hsl(50,48%,78%))",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 10px"}}>
+                    <$.Dog s={32} c="hsl(30,38%,38%)"/>
+                  </div>
+                  <div style={{color:"#fff",fontWeight:800,fontSize:14}}>MAX — PERDIDO EN PALERMO</div>
+                  <div style={{color:"#94A3B8",fontSize:10,marginTop:2}}>Golden Retriever · Buenos Aires · 28/03/2026</div>
+                  <div style={{color:"#4ADE80",fontSize:11,fontWeight:700,marginTop:4}}>+54 11 5555-1234</div>
+                </div>
+                <div style={{position:"absolute",bottom:8,right:8,background:"#FF0000",borderRadius:6,padding:"3px 8px",fontSize:9,fontWeight:700,color:"#fff"}}>▶ Ver en YouTube</div>
+                <div style={{position:"absolute",bottom:8,left:8,background:"rgba(0,0,0,.6)",borderRadius:5,padding:"3px 7px",fontSize:9,color:"#fff"}}>👁 1,240 vistas</div>
+              </div>
+
+              <div style={{padding:"16px 18px"}}>
+                {/* Description */}
+                <p style={{color:"#57534E",fontSize:12,lineHeight:1.6,marginBottom:14}}>Cada mascota reportada se convierte automáticamente en un video con foto, datos, zona y contacto. Se publica en YouTube, se distribuye como Short y Reel en Instagram y TikTok.</p>
+
+                {/* Features grid */}
                 <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:14}}>
-                  {[{icon:"📹",t:"Videos automáticos",d:"Cada reporte genera un video"},{icon:"👀",t:"Avistamientos",d:"Usuarios suben lo que ven"},{icon:"🔔",t:"Alertas zona",d:"Suscribite para tu barrio"},{icon:"📢",t:"Compartí",d:"Viralizar salva mascotas"}].map((f,i)=>(
-                    <div key={i} style={{background:"#FEF2F2",borderRadius:10,padding:10}}><div style={{fontSize:18,marginBottom:4}}>{f.icon}</div><div style={{fontWeight:700,fontSize:11,color:"#DC2626"}}>{f.t}</div><div style={{fontSize:10,color:"#78716C"}}>{f.d}</div></div>
+                  {[
+                    {icon:"🎬",t:"Videos automáticos",d:"Cada reporte genera un video de 30-60 seg al instante"},
+                    {icon:"📲",t:"Shorts + Reels",d:"Se distribuye en YouTube, Instagram y TikTok"},
+                    {icon:"🏆",t:"Historias de reencuentro",d:"Los reencuentros son contenido viral que atrae usuarios"},
+                    {icon:"💰",t:"Monetización",d:"AdSense + sponsors de veterinarias y petshops"},
+                  ].map((f,i)=>(
+                    <div key={i} style={{background:"#FEF2F2",borderRadius:10,padding:10}}>
+                      <div style={{fontSize:18,marginBottom:4}}>{f.icon}</div>
+                      <div style={{fontWeight:700,fontSize:11,color:"#DC2626"}}>{f.t}</div>
+                      <div style={{fontSize:10,color:"#78716C",lineHeight:1.4}}>{f.d}</div>
+                    </div>
                   ))}
                 </div>
-                <button onClick={()=>window.open("https://youtube.com/@PetFinderAI","_blank")} style={{width:"100%",padding:"14px",borderRadius:12,border:"none",background:"linear-gradient(135deg,#DC2626,#EF4444)",color:"#fff",cursor:"pointer",fontFamily:"inherit",fontWeight:700,fontSize:14,display:"flex",alignItems:"center",justifyContent:"center",gap:8,boxShadow:"0 4px 16px rgba(220,38,38,.3)"}}>
-                  <svg width={18} height={18} viewBox="0 0 24 24" fill="#fff"><polygon points="9.545 15.568 15.818 12 9.545 8.432"/></svg> Ir a PetFinder TV
+
+                {/* Stats */}
+                <div style={{display:"flex",gap:8,marginBottom:14}}>
+                  {[{n:"0→∞",l:"Suscriptores",c:"#FF0000"},{n:"Auto",l:"Videos/día",c:"#FF4444"},{n:"50K+",l:"Alcance potencial",c:"#EF4444"}].map((s,i)=>(
+                    <div key={i} style={{flex:1,textAlign:"center",background:"#FFF5F5",borderRadius:10,padding:10}}>
+                      <div style={{fontSize:16,fontWeight:800,color:s.c}}>{s.n}</div>
+                      <div style={{fontSize:9,color:"#A8A29E",fontWeight:600}}>{s.l}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA YouTube */}
+                <button onClick={()=>window.open("https://youtube.com/@PetFinderAI","_blank")} style={{
+                  width:"100%",padding:"14px",borderRadius:12,border:"none",
+                  background:"linear-gradient(135deg,#DC2626,#EF4444)",color:"#fff",
+                  cursor:"pointer",fontFamily:"inherit",fontWeight:700,fontSize:14,
+                  display:"flex",alignItems:"center",justifyContent:"center",gap:8,
+                  boxShadow:"0 4px 16px rgba(220,38,38,.3)",marginBottom:10,
+                }}>
+                  <svg width={18} height={18} viewBox="0 0 24 24" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/></svg>
+                  Ir a PetFinder TV en YouTube
                 </button>
+
+                {/* Sponsor spot */}
+                <div style={{background:"#FEF3C7",borderRadius:10,padding:"10px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                  <div>
+                    <div style={{fontSize:11,fontWeight:700,color:"#92400E"}}>¿Sos veterinaria o petshop?</div>
+                    <div style={{fontSize:10,color:"#A16207"}}>Patrocinás los videos y llegás a dueños de mascotas en tu zona</div>
+                  </div>
+                  <button
+                    style={{background:"#E8590C",color:"#fff",border:"none",borderRadius:8,padding:"7px 12px",fontWeight:700,fontSize:11,cursor:"pointer",fontFamily:"inherit",flexShrink:0,marginLeft:10}}
+                    onClick={()=>window.open("https://wa.me/5491155551234?text=Quiero%20ser%20sponsor%20en%20PetFinder%20TV","_blank")}
+                  >Ser sponsor</button>
+                </div>
               </div>
             </div>
           </section>
 
-          {/* ═══ PLAN DE BÚSQUEDA EN REDES + PAGOS ═══ */}
+                    {/* ═══ PLAN DE BÚSQUEDA EN REDES + PAGOS ═══ */}
           <section style={{padding:"0 14px 24px",maxWidth:640,margin:"0 auto"}}>
             <div style={{background:"linear-gradient(135deg,#1E293B,#0F172A)",borderRadius:18,padding:20,position:"relative",overflow:"hidden"}}>
               <div style={{position:"absolute",top:-20,right:-20,width:80,height:80,borderRadius:"50%",background:"rgba(124,58,237,.1)"}}/>
@@ -2809,11 +2879,12 @@ export default function App() {
             plan={checkoutPlan}
             user={currentUser}
             onSuccess={async(receipt)=>{
-              // Save subscription date
+              // Save subscription
               const u = await DB.get(`user:${currentUser.id}`);
               if(u) {
                 u.subscribedAt = new Date().toISOString();
-                u.plan = "weekly";
+                u.plan = checkoutPlan?.id || "weekly";
+                u.planName = checkoutPlan?.name || "Suscripción";
                 await DB.set(`user:${currentUser.id}`, u);
                 const { passHash, ...safe } = u;
                 setCurrentUser(safe);
@@ -3370,7 +3441,7 @@ function PetForm({title,sub,type,onSubmit,onClose,analyzePhoto,analyzingPhoto,an
 // PAYMENT COMPONENTS
 // ═══════════════════════════════════════════════════════════
 const SUBSCRIPTION = {
-  price: 20, currency: "USD", period: 7, // days
+  price: 20, currency: "USD", period: 7,
   name: "Suscripción Semanal",
   includes: [
     "Ver resultados de búsqueda IA",
@@ -3388,7 +3459,18 @@ const SUBSCRIPTION = {
   ],
 };
 
+// ─── PLANES DE MONETIZACIÓN (4 CAPAS) ───
+const PLANS = {
+  club:    { id:"club",    name:"PetFinder Club",    price:5,    period:"mes",    color:"#F59E0B", desc:"Vet IA · QR · Ficha médica · Recordatorios · Comunidad" },
+  busqueda:{ id:"busqueda",name:"Búsqueda",          price:20,   period:"semana", color:"#E8590C", desc:"Face ID Tracker · Resultados · Contacto · Alertas 7 días" },
+  maxima:  { id:"maxima",  name:"Máxima Difusión",   price:50,   period:"semana", color:"#7C3AED", desc:"Todo Búsqueda + Redes sociales + Flyers IA + WhatsApp" },
+  shield:  { id:"shield",  name:"Shield Preventivo", price:5,    period:"mes",    color:"#059669", desc:"Todo listo si se pierde · ID Digital · Radar semanal" },
+  petfit:  { id:"petfit",  name:"PetFit Tracker",    price:9.99, period:"mes",    color:"#10B981", desc:"Tracker diario de salud con IA · Detección de cambios" },
+};
+
 function isSubscriptionActive(user) {
+  if (!user) return false;
+  if (["club","shield","petfit","boost"].includes(user.plan)) return true;
   if (!user?.subscribedAt) return false;
   const subDate = new Date(user.subscribedAt);
   const now = new Date();
@@ -3407,233 +3489,144 @@ function daysRemaining(user) {
 function PremiumFlow({ currentUser, onSelectPlan, onClose }) {
   const active = isSubscriptionActive(currentUser);
   const days = daysRemaining(currentUser);
+  const [selectedId, setSelectedId] = useState(null);
+
+  const planList = [
+    {
+      id:"club", emoji:"🐾", name:"PetFinder Club", price:"us$5", period:"/mes",
+      color:"#F59E0B", bg:"linear-gradient(135deg,#FEF3C7,#FDE68A)", border:"#F59E0B40",
+      badge:null,
+      feats:["Vet IA 24/7 ilimitado","QR para el collar","Ficha médica digital","Recordatorios vacunas","Alertas zona","Comunidad","PetMatch"],
+      bonus:"Si se pierde, el Face ID se activa al instante con la foto ya cargada.",
+      planKey:{key:"club",n:"PetFinder Club",price:5,finalPrice:5,finalPeriod:"mes",billing:"monthly",c:"#F59E0B",fs:["Vet IA 24/7","QR collar","Ficha médica","Recordatorios","Alertas zona"]},
+    },
+    {
+      id:"busqueda", emoji:"🔍", name:"Búsqueda", price:"US$20", period:"/sem",
+      color:"#E8590C", bg:"#fff", border:"#E8590C30",
+      badge:null,
+      feats:["Face ID Tracker activo","Ver coincidencias IA","Contacto directo","Alertas geolocalizadas 7 días","Chat con quien la encontró"],
+      bonus:null,
+      planKey:{key:"weekly",n:"Búsqueda",price:20,finalPrice:20,finalPeriod:"semana",billing:"weekly",c:"#E8590C",fs:["Face ID Tracker","Coincidencias IA","Contacto directo","Alertas 7 días"]},
+    },
+    {
+      id:"maxima", emoji:"📢", name:"Máxima Difusión", price:"US$50", period:"/sem",
+      color:"#7C3AED", bg:"linear-gradient(135deg,#7C3AED08,#A78BFA08)", border:"#7C3AED",
+      badge:"⭐ MÁS ELEGIDO",
+      feats:["Todo Búsqueda +","Publicación en Instagram, Facebook, X, TikTok","Difusión WhatsApp y Telegram","Flyer profesional auto-generado","Republicación cada 48hs","Alerta a refugios y veterinarias en 20km","Reporte de alcance (50K+ personas)"],
+      bonus:null,
+      planKey:{key:"boost",n:"Máxima Difusión",price:50,finalPrice:50,finalPeriod:"semana",billing:"weekly",c:"#7C3AED",fs:["Todo Búsqueda","Redes sociales","Flyers IA","Republicación 48hs","Refugios y vets"]},
+    },
+    {
+      id:"shield", emoji:"🛡️", name:"Shield Preventivo", price:"US$5", period:"/mes",
+      color:"#059669", bg:"#05966908", border:"#05966930",
+      badge:null,
+      feats:["ID Digital + QR activo","IA pre-analizada para búsqueda inmediata","Protocolo emergencia en 1 toque","Radar semanal preventivo","Veterinario IA Premium","Alertas en tu zona"],
+      bonus:null,
+      planKey:{key:"shield",n:"Shield Preventivo",price:5,finalPrice:5,finalPeriod:"mes",billing:"monthly",c:"#059669",fs:["ID Digital","IA pre-analizada","Emergencia 1 toque","Radar semanal","Vet IA Premium"]},
+    },
+    {
+      id:"petfit", emoji:"💪", name:"PetFit Tracker", price:"US$9.99", period:"/mes",
+      color:"#10B981", bg:"#10B98108", border:"#10B98130",
+      badge:null,
+      feats:["Registro diario de alimentación y actividad","IA detecta cambios por foto semanal","Análisis de peso y condición corporal","Recordatorios personalizados","Integrado con Face ID Tracker"],
+      bonus:null,
+      planKey:{key:"petfit",n:"PetFit Tracker",price:9.99,finalPrice:9.99,finalPeriod:"mes",billing:"monthly",c:"#10B981",fs:["Registro diario","Detección IA","Análisis peso","Recordatorios"]},
+    },
+  ];
 
   return (
     <div>
-      <div style={{textAlign:"center",marginBottom:20}}>
-        <div style={{width:56,height:56,borderRadius:16,margin:"0 auto 10px",background:active?"linear-gradient(135deg,#059669,#10B981)":"linear-gradient(135deg,#E8590C,#DC2626)",display:"flex",alignItems:"center",justifyContent:"center"}}>
-          {active?<$.Check s={28} c="#fff"/>:<$.Zap s={28} c="#fff"/>}
+      <div style={{textAlign:"center",marginBottom:18}}>
+        <div style={{width:52,height:52,borderRadius:15,margin:"0 auto 10px",background:active?"linear-gradient(135deg,#059669,#10B981)":"linear-gradient(135deg,#E8590C,#DC2626)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+          {active?<$.Check s={26} c="#fff"/>:<$.Zap s={26} c="#fff"/>}
         </div>
-        <h3 style={{fontSize:22,fontWeight:800,letterSpacing:"-.03em"}}>
-          {active?"Suscripción activa":"Desbloquear resultados"}
+        <h3 style={{fontSize:21,fontWeight:800,letterSpacing:"-.03em"}}>
+          {active?"Suscripción activa":"Elegí tu plan"}
         </h3>
         {active?(
-          <p style={{fontSize:13,color:"#059669",fontWeight:700,marginTop:6}}>
-            Te quedan {days} día{days!==1?"s":""} de acceso
+          <p style={{fontSize:12,color:"#059669",fontWeight:700,marginTop:4}}>
+            {currentUser?.planName || "Plan activo"} · {days > 0 ? `${days} días restantes` : "Activo"}
           </p>
         ):(
-          <p style={{fontSize:12,color:"#A8A29E",marginTop:6}}>
-            Pagá una vez, accedé 7 días completos
-          </p>
+          <p style={{fontSize:11,color:"#A8A29E",marginTop:4}}>Subir la foto es siempre gratis</p>
         )}
       </div>
 
-      {/* What's included */}
-      <div style={{background:"#FAFAF9",borderRadius:16,padding:16,marginBottom:16}}>
-        <div style={{fontSize:11,fontWeight:700,color:"#059669",letterSpacing:".06em",marginBottom:10}}>GRATIS PARA TODOS</div>
+      {/* Free features */}
+      <div style={{background:"#FAFAF9",borderRadius:12,padding:12,marginBottom:14}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#059669",letterSpacing:".06em",marginBottom:8}}>GRATIS PARA TODOS</div>
         {SUBSCRIPTION.free.map((f,i)=>(
-          <div key={i} style={{display:"flex",alignItems:"center",gap:7,fontSize:13,color:"#57534E",marginBottom:6}}>
-            <$.Check s={14} c="#059669"/>{f}
+          <div key={i} style={{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"#57534E",marginBottom:5}}>
+            <$.Check s={13} c="#059669"/>{f}
           </div>
         ))}
       </div>
 
-      {/* Paid tier */}
-      <div style={{
-        background:active?"#05966908":"linear-gradient(135deg,#E8590C05,#DC262605)",
-        border:active?"2px solid #05966930":"2px solid #E8590C",
-        borderRadius:18,padding:18,marginBottom:16,position:"relative",
-      }}>
-        {!active&&<div style={{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:"#E8590C",color:"#fff",padding:"3px 16px",borderRadius:100,fontSize:10,fontWeight:800,letterSpacing:".08em"}}>ACCESO COMPLETO</div>}
-        
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
-          <div>
-            <div style={{fontWeight:800,fontSize:16,color:active?"#059669":"#E8590C"}}>
-              {active?"Plan activo":"Suscripción semanal"}
+      {/* Plan cards */}
+      <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:16}}>
+        {planList.map((plan)=>(
+          <div
+            key={plan.id}
+            onClick={()=>setSelectedId(selectedId===plan.id?null:plan.id)}
+            style={{
+              background:plan.bg, border:`2px solid ${selectedId===plan.id?plan.color:plan.border}`,
+              borderRadius:14, padding:14, cursor:"pointer", position:"relative",
+              transition:"border .2s", overflow:"hidden",
+            }}
+          >
+            {plan.badge&&(
+              <div style={{position:"absolute",top:-9,right:14,background:plan.color,color:"#fff",padding:"2px 10px",borderRadius:100,fontSize:8,fontWeight:800}}>{plan.badge}</div>
+            )}
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              <div style={{display:"flex",alignItems:"center",gap:8}}>
+                <span style={{fontSize:20}}>{plan.emoji}</span>
+                <div>
+                  <div style={{fontWeight:800,fontSize:14,color:plan.color}}>{plan.name}</div>
+                  <div style={{fontSize:10,color:"#78716C",marginTop:1,lineHeight:1.3}}>{PLANS[plan.id]?.desc||""}</div>
+                </div>
+              </div>
+              <div style={{textAlign:"right",flexShrink:0,marginLeft:8}}>
+                <span style={{fontSize:20,fontWeight:800,color:"#1C1917"}}>{plan.price}</span>
+                <span style={{fontSize:10,color:"#A8A29E"}}>{plan.period}</span>
+              </div>
             </div>
-            <div style={{display:"flex",alignItems:"baseline",gap:4,marginTop:2}}>
-              <span style={{fontSize:32,fontWeight:800,letterSpacing:"-.04em"}}>US$20</span>
-              <span style={{fontSize:13,color:"#A8A29E",fontWeight:600}}>/7 días</span>
-            </div>
-          </div>
-          {active&&(
-            <div style={{textAlign:"right"}}>
-              <div style={{fontSize:28,fontWeight:800,color:"#059669"}}>{days}</div>
-              <div style={{fontSize:10,color:"#A8A29E",fontWeight:600}}>días restantes</div>
-            </div>
-          )}
-        </div>
 
-        {SUBSCRIPTION.includes.map((f,i)=>(
-          <div key={i} style={{display:"flex",alignItems:"center",gap:7,fontSize:13,color:"#57534E",marginBottom:6}}>
-            <$.Check s={14} c={active?"#059669":"#E8590C"}/>{f}
+            {/* Expanded features */}
+            {selectedId===plan.id&&(
+              <div style={{marginTop:12,animation:"fadeIn .25s"}}>
+                {plan.feats.map((f,i)=>(
+                  <div key={i} style={{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"#44403C",marginBottom:5}}>
+                    <$.Check s={12} c={plan.color}/>{f}
+                  </div>
+                ))}
+                {plan.bonus&&(
+                  <div style={{marginTop:8,padding:"8px 10px",background:"rgba(0,0,0,.04)",borderRadius:8,fontSize:11,color:"#57534E",fontWeight:600}}>
+                    💡 {plan.bonus}
+                  </div>
+                )}
+                <button className="bp" style={{width:"100%",justifyContent:"center",marginTop:12,padding:"12px",fontSize:13,background:plan.color,borderRadius:10}}
+                  onClick={(e)=>{e.stopPropagation();onSelectPlan(plan.planKey);}}>
+                  <$.Zap s={14}/> Elegir {plan.name}
+                </button>
+              </div>
+            )}
           </div>
         ))}
-
-        {!active?(
-          <button className="bp" style={{width:"100%",justifyContent:"center",marginTop:14,padding:"14px 24px",fontSize:15}}
-            onClick={()=>onSelectPlan({key:"weekly",n:"Búsqueda Básica",price:20,finalPrice:20,finalPeriod:"semana",billing:"weekly",c:"#E8590C",fs:SUBSCRIPTION.includes})}>
-            <$.Zap s={16}/> Suscribirme por US$20
-          </button>
-        ):(
-          <div style={{marginTop:14,textAlign:"center"}}>
-            <div style={{fontSize:12,color:"#78716C"}}>Expira el {new Date(new Date(currentUser.subscribedAt).getTime()+7*24*60*60*1000).toLocaleDateString("es-AR")}</div>
-            <button className="bo" style={{marginTop:8,width:"100%",justifyContent:"center"}}
-              onClick={()=>onSelectPlan({key:"weekly",n:"Búsqueda Básica",price:20,finalPrice:20,finalPeriod:"semana",billing:"weekly",c:"#E8590C",fs:SUBSCRIPTION.includes})}>
-              Renovar ahora
-            </button>
-          </div>
-        )}
       </div>
 
-      {/* ═══ PLAN US$50 — MÁXIMA EXPOSICIÓN ═══ */}
-      <div style={{
-        background:"linear-gradient(135deg,#7C3AED08,#2563EB08)",
-        border:currentUser?.plan==="boost"?"2px solid #059669":"2px solid #7C3AED",
-        borderRadius:18,padding:18,marginBottom:16,position:"relative",overflow:"hidden",
-      }}>
-        {/* Decorative glow */}
-        <div style={{position:"absolute",top:-30,right:-30,width:100,height:100,borderRadius:"50%",background:"rgba(124,58,237,.08)"}}/>
-        <div style={{position:"absolute",bottom:-20,left:-20,width:70,height:70,borderRadius:"50%",background:"rgba(37,99,235,.06)"}}/>
-        
-        <div style={{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:"linear-gradient(135deg,#7C3AED,#2563EB)",color:"#fff",padding:"3px 16px",borderRadius:100,fontSize:9,fontWeight:800,letterSpacing:".08em"}}>
-          {currentUser?.plan==="boost"?"ACTIVO":"MÁXIMA EXPOSICIÓN"}
-        </div>
-        
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:8,marginBottom:14}}>
-          <div>
-            <div style={{fontWeight:800,fontSize:16,color:"#7C3AED"}}>Difusión en Redes</div>
-            <div style={{display:"flex",alignItems:"baseline",gap:4,marginTop:2}}>
-              <span style={{fontSize:32,fontWeight:800,letterSpacing:"-.04em"}}>US$50</span>
-              <span style={{fontSize:13,color:"#A8A29E",fontWeight:600}}>/7 días</span>
-            </div>
-            <div style={{fontSize:11,color:"#7C3AED",fontWeight:600,marginTop:2}}>Incluye todo el plan de US$20 +</div>
-          </div>
-        </div>
-
-        {/* Social media icons row */}
-        <div style={{display:"flex",gap:6,marginBottom:14,flexWrap:"wrap"}}>
-          {[
-            {name:"Instagram",color:"#E4405F",bg:"#E4405F15"},
-            {name:"Facebook",color:"#1877F2",bg:"#1877F215"},
-            {name:"X (Twitter)",color:"#1C1917",bg:"#1C191710"},
-            {name:"TikTok",color:"#000",bg:"#00000010"},
-            {name:"WhatsApp",color:"#25D366",bg:"#25D36615"},
-            {name:"Telegram",color:"#0088CC",bg:"#0088CC15"},
-            {name:"Nextdoor",color:"#00B246",bg:"#00B24615"},
-            {name:"Grupos vecinales",color:"#D97706",bg:"#D9770615"},
-          ].map((s,i)=>(
-            <span key={i} style={{background:s.bg,color:s.color,padding:"4px 10px",borderRadius:8,fontSize:10,fontWeight:700,display:"flex",alignItems:"center",gap:3}}>
-              {s.name}
-            </span>
+      {/* How payment works */}
+      <div style={{background:"#1C1917",borderRadius:12,padding:14,marginBottom:14}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#FBBF24",letterSpacing:".06em",marginBottom:10}}>MÉTODOS DE PAGO</div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
+          {[{n:"💙 MercadoPago (AR$)",c:"#00AEEF"},{n:"💜 Stripe (USD)",c:"#635BFF"},{n:"💳 Tarjeta internacional",c:"#A78BFA"},{n:"🏦 Transferencia bancaria",c:"#4ADE80"}].map((p,i)=>(
+            <span key={i} style={{background:`${p.c}20`,color:p.c,padding:"4px 10px",borderRadius:8,fontSize:10,fontWeight:700}}>{p.n}</span>
           ))}
         </div>
-
-        {/* Features */}
-        {[
-          "Publicación automática en Instagram, Facebook, X y TikTok",
-          "Difusión en grupos de WhatsApp y Telegram de mascotas",
-          "Publicación en Nextdoor y grupos vecinales de la zona",
-          "Imagen profesional generada con datos de tu mascota",
-          "Hashtags optimizados para máximo alcance",
-          "Republicación cada 48hs para mantener visibilidad",
-          "Reporte de alcance: cuánta gente vio tu publicación",
-          "Alerta a refugios y veterinarias en radio de 20km",
-          "Contacto prioritario: las coincidencias van primero a vos",
-        ].map((f,i)=>(
-          <div key={i} style={{display:"flex",alignItems:"center",gap:7,fontSize:12,color:"#57534E",marginBottom:5}}>
-            <$.Check s={14} c="#7C3AED"/>{f}
-          </div>
-        ))}
-
-        {/* How the auto-posting works */}
-        <div style={{background:"#fff",borderRadius:12,padding:12,marginTop:12,border:"1px solid #7C3AED15"}}>
-          <div style={{fontSize:10,fontWeight:700,color:"#7C3AED",letterSpacing:".05em",marginBottom:8}}>¿CÓMO FUNCIONA LA DIFUSIÓN?</div>
-          <div style={{display:"flex",flexDirection:"column",gap:8}}>
-            {[
-              {n:"1",t:"Generamos la publicación",d:"Con la foto, datos y zona de tu mascota creamos un flyer profesional con toda la info de contacto."},
-              {n:"2",t:"Publicamos en todas las redes",d:"Instagram, Facebook, X, TikTok, WhatsApp y Telegram. Con hashtags y geotags optimizados."},
-              {n:"3",t:"Republicamos cada 48hs",d:"Para que no se pierda en el feed. Cada republicación tiene nuevo copy para mayor alcance."},
-              {n:"4",t:"Reporte de alcance",d:"Te mostramos cuántas personas vieron tu publicación y desde qué plataforma."},
-            ].map((s,i)=>(
-              <div key={i} style={{display:"flex",gap:8}}>
-                <div style={{width:20,height:20,borderRadius:6,background:"#7C3AED",display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,fontWeight:800,color:"#fff",flexShrink:0,marginTop:1}}>{s.n}</div>
-                <div><div style={{fontWeight:700,fontSize:11,color:"#1C1917"}}>{s.t}</div><div style={{fontSize:10,color:"#A8A29E",lineHeight:1.4}}>{s.d}</div></div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Reach estimate */}
-        <div style={{background:"linear-gradient(135deg,#7C3AED10,#2563EB10)",borderRadius:12,padding:12,marginTop:12,textAlign:"center"}}>
-          <div style={{fontSize:10,fontWeight:700,color:"#7C3AED",letterSpacing:".05em",marginBottom:6}}>ALCANCE ESTIMADO</div>
-          <div style={{display:"flex",justifyContent:"center",gap:16}}>
-            {[
-              {n:"50K+",l:"Personas alcanzadas"},
-              {n:"8+",l:"Plataformas"},
-              {n:"3x",l:"Republicaciones"},
-            ].map((s,i)=>(
-              <div key={i}>
-                <div style={{fontSize:22,fontWeight:800,color:"#7C3AED"}}>{s.n}</div>
-                <div style={{fontSize:9,color:"#A8A29E",fontWeight:600}}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <button className="bp" style={{width:"100%",justifyContent:"center",marginTop:14,padding:"14px 24px",fontSize:15,background:"linear-gradient(135deg,#7C3AED,#2563EB)"}}
-          onClick={()=>onSelectPlan({key:"boost",n:"Máxima Exposición",price:50,finalPrice:50,finalPeriod:"semana",billing:"weekly",c:"#7C3AED",
-            fs:["Todo el plan Búsqueda (US$20)","Publicación en Instagram, Facebook, X, TikTok","Difusión WhatsApp, Telegram, grupos vecinales","Flyer profesional auto-generado","Republicación cada 48hs","Reporte de alcance","Alerta a refugios y veterinarias","Contacto prioritario"]
-          })}>
-          <$.Zap s={16}/> Máxima Exposición US$50
-        </button>
+        <div style={{fontSize:10,color:"#64748B",marginTop:8}}>Argentina: MercadoPago (AR$) · LATAM/mundo: Stripe (USD)</div>
       </div>
 
-      {/* How it works */}
-      <div style={{background:"#1C1917",borderRadius:14,padding:16,marginBottom:14}}>
-        <div style={{fontSize:11,fontWeight:700,color:"#FBBF24",letterSpacing:".06em",marginBottom:10}}>¿CÓMO FUNCIONA?</div>
-        {[
-          {n:"1",t:"Subí la foto gratis",d:"Registrá tu mascota perdida o encontrada sin costo."},
-          {n:"2",t:"La IA escanea",d:"Ves el reconocimiento en acción y tu mascota publicada."},
-          {n:"3",t:"US$20 → Resultados",d:"Desbloqueá coincidencias, contactos y alertas por 7 días."},
-          {n:"4",t:"US$50 → Redes sociales",d:"Difusión automática en Instagram, Facebook, X, TikTok, WhatsApp y más."},
-        ].map((s,i)=>(
-          <div key={i} style={{display:"flex",gap:10,marginBottom:i<3?10:0}}>
-            <div style={{width:24,height:24,borderRadius:7,background:i<3?"#E8590C":"#7C3AED",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,color:"#fff",flexShrink:0}}>{s.n}</div>
-            <div>
-              <div style={{fontWeight:700,fontSize:12,color:"#fff"}}>{s.t}</div>
-              <div style={{fontSize:11,color:"#A8A29E",lineHeight:1.4}}>{s.d}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Compare plans quick */}
-      <div style={{background:"#FAFAF9",borderRadius:14,padding:14,marginBottom:14}}>
-        <div style={{fontSize:10,fontWeight:700,color:"#A8A29E",letterSpacing:".06em",marginBottom:10}}>COMPARAR PLANES</div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
-          <div style={{background:"#fff",borderRadius:10,padding:10,border:"1px solid #E8590C30",textAlign:"center"}}>
-            <div style={{fontSize:18,fontWeight:800,color:"#E8590C"}}>US$20</div>
-            <div style={{fontSize:10,color:"#A8A29E",fontWeight:600}}>/ semana</div>
-            <div style={{fontSize:11,fontWeight:700,color:"#57534E",marginTop:6}}>Búsqueda</div>
-            <div style={{fontSize:10,color:"#A8A29E",lineHeight:1.4,marginTop:2}}>IA + contactos + alertas</div>
-          </div>
-          <div style={{background:"#fff",borderRadius:10,padding:10,border:"1px solid #7C3AED30",textAlign:"center",position:"relative"}}>
-            <div style={{position:"absolute",top:-6,right:8,background:"#7C3AED",color:"#fff",padding:"1px 8px",borderRadius:6,fontSize:8,fontWeight:800}}>RECOMENDADO</div>
-            <div style={{fontSize:18,fontWeight:800,color:"#7C3AED"}}>US$50</div>
-            <div style={{fontSize:10,color:"#A8A29E",fontWeight:600}}>/ semana</div>
-            <div style={{fontSize:11,fontWeight:700,color:"#57534E",marginTop:6}}>Máxima Exposición</div>
-            <div style={{fontSize:10,color:"#A8A29E",lineHeight:1.4,marginTop:2}}>Todo + redes sociales</div>
-          </div>
-        </div>
-      </div>
-
-      <div style={{display:"flex",justifyContent:"center",gap:14,flexWrap:"wrap"}}>
-        {[
-          {i:<$.Shield s={12} c="#059669"/>,t:"Pago seguro"},
-          {i:<$.Clock s={12} c="#2563EB"/>,t:"Renovación opcional"},
-          {i:<$.Heart s={12} c="#DC2626"/>,t:"Proyecto solidario"},
-        ].map((b,i)=>(
+      <div style={{display:"flex",justifyContent:"center",gap:14,flexWrap:"wrap",marginTop:4}}>
+        {[{i:<$.Shield s={12} c="#059669"/>,t:"Pago seguro"},{i:<$.Clock s={12} c="#2563EB"/>,t:"Cancelás cuando quieras"},{i:<$.Heart s={12} c="#DC2626"/>,t:"Proyecto solidario"}].map((b,i)=>(
           <div key={i} style={{display:"flex",alignItems:"center",gap:4,fontSize:10,color:"#A8A29E",fontWeight:600}}>{b.i}{b.t}</div>
         ))}
       </div>
@@ -3642,71 +3635,53 @@ function PremiumFlow({ currentUser, onSelectPlan, onClose }) {
 }
 
 function CheckoutForm({ plan, user, onSuccess, onBack }) {
+  const [method, setMethod] = useState(null); // "mp" | "stripe" | "transfer" | "card"
   const [card, setCard] = useState({ number:"", name:"", expiry:"", cvc:"" });
   const [errors, setErrors] = useState({});
   const [processing, setProcessing] = useState(false);
-  const [step, setStep] = useState(1); // 1=card, 2=confirm, 3=processing
 
-  const formatCardNumber = (v) => {
-    const clean = v.replace(/\D/g,"").slice(0,16);
-    return clean.replace(/(.{4})/g,"$1 ").trim();
-  };
-  const formatExpiry = (v) => {
-    const clean = v.replace(/\D/g,"").slice(0,4);
-    if (clean.length > 2) return clean.slice(0,2)+"/"+clean.slice(2);
-    return clean;
-  };
-  const detectCardBrand = (n) => {
-    const d = n.replace(/\s/g,"");
-    if (/^4/.test(d)) return {brand:"Visa",color:"#1A1F71"};
-    if (/^5[1-5]/.test(d)) return {brand:"Mastercard",color:"#EB001B"};
-    if (/^3[47]/.test(d)) return {brand:"Amex",color:"#006FCF"};
-    return {brand:"",color:"#A8A29E"};
-  };
+  const formatCardNumber = (v) => v.replace(/\D/g,"").slice(0,16).replace(/(.{4})/g,"$1 ").trim();
+  const formatExpiry = (v) => { const c=v.replace(/\D/g,"").slice(0,4); return c.length>2?c.slice(0,2)+"/"+c.slice(2):c; };
+  const detectBrand = (n) => { const d=n.replace(/\s/g,""); if(/^4/.test(d))return{b:"Visa",c:"#1A1F71"}; if(/^5[1-5]/.test(d))return{b:"MC",c:"#EB001B"}; return{b:"",c:"#A8A29E"}; };
 
   const validate = () => {
-    const e = {};
-    const num = card.number.replace(/\s/g,"");
-    if (num.length < 13) e.number = "Número de tarjeta inválido";
-    if (!card.name.trim()) e.name = "Nombre del titular requerido";
-    if (!/^\d{2}\/\d{2}$/.test(card.expiry)) e.expiry = "Formato MM/AA";
-    else {
-      const [m,y] = card.expiry.split("/").map(Number);
-      if (m < 1 || m > 12) e.expiry = "Mes inválido";
-      if (y < 26) e.expiry = "Tarjeta vencida";
-    }
-    if (card.cvc.length < 3) e.cvc = "CVC inválido";
+    const e={};
+    const num=card.number.replace(/\s/g,"");
+    if(num.length<13) e.number="Número inválido";
+    if(!card.name.trim()) e.name="Nombre requerido";
+    if(!/^\d{2}\/\d{2}$/.test(card.expiry)) e.expiry="Formato MM/AA";
+    if(card.cvc.length<3) e.cvc="CVC inválido";
     setErrors(e);
-    return Object.keys(e).length === 0;
+    return Object.keys(e).length===0;
   };
 
-  const handlePay = async () => {
-    if (!validate()) return;
-    setStep(3);
+  const processPayment = async(payMethod) => {
     setProcessing(true);
-    // Simulate payment processing
-    await new Promise(r => setTimeout(r, 2500));
+    await new Promise(r=>setTimeout(r,2000));
     const receipt = {
-      id: "rcpt_" + Date.now(),
-      plan: plan.n,
-      amount: plan.finalPrice,
-      period: plan.finalPeriod,
-      cardLast4: card.number.replace(/\s/g,"").slice(-4),
-      cardBrand: detectCardBrand(card.number).brand,
-      date: new Date().toISOString(),
-      email: user?.email,
+      id:"rcpt_"+Date.now(),
+      plan:plan.n, amount:plan.finalPrice, period:plan.finalPeriod,
+      method:payMethod,
+      cardLast4:payMethod==="card"?card.number.replace(/\s/g,"").slice(-4):null,
+      date:new Date().toISOString(), email:user?.email,
     };
-    // Save receipt
-    await DB.set(`receipt:${receipt.id}`, receipt);
-    const receipts = (await DB.get(`receipts:${user?.id}`)) || [];
+    await DB.set(`receipt:${receipt.id}`,receipt);
+    const receipts=(await DB.get(`receipts:${user?.id}`))||[];
     receipts.unshift(receipt.id);
-    await DB.set(`receipts:${user?.id}`, receipts);
-
+    await DB.set(`receipts:${user?.id}`,receipts);
     setProcessing(false);
     onSuccess(receipt);
   };
 
-  const cardBrand = detectCardBrand(card.number);
+  const brand = detectBrand(card.number);
+
+  if(processing) return (
+    <div style={{textAlign:"center",padding:"48px 16px"}}>
+      <div style={{width:56,height:56,margin:"0 auto 16px",border:"3px solid #E8590C",borderTopColor:"transparent",borderRadius:"50%",animation:"spin .7s linear infinite"}}/>
+      <h3 style={{fontSize:18,fontWeight:800,letterSpacing:"-.03em",marginBottom:6}}>Procesando pago...</h3>
+      <p style={{fontSize:13,color:"#A8A29E"}}>Un momento por favor</p>
+    </div>
+  );
 
   return (
     <div>
@@ -3715,98 +3690,210 @@ function CheckoutForm({ plan, user, onSuccess, onBack }) {
         <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",padding:2}}><$.Back s={20} c="#78716C"/></button>
         <div>
           <h3 style={{fontSize:18,fontWeight:800,letterSpacing:"-.03em"}}>Checkout</h3>
-          <p style={{fontSize:11,color:"#A8A29E"}}>Plan {plan.n} · ${plan.finalPrice.toLocaleString("es-AR")}/{plan.finalPeriod}</p>
+          <p style={{fontSize:11,color:"#A8A29E"}}>Plan {plan.n} · US${plan.finalPrice}/{plan.finalPeriod}</p>
         </div>
       </div>
 
-      {step < 3 && (
-        <>
-          {/* Order summary */}
-          <div style={{background:"#FAFAF9",borderRadius:14,padding:14,marginBottom:16}}>
-            <div style={{fontSize:11,fontWeight:700,color:"#A8A29E",letterSpacing:".05em",marginBottom:8}}>RESUMEN</div>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
-              <span style={{fontSize:14,fontWeight:600}}>PetFinder {plan.n}</span>
-              <span style={{fontSize:14,fontWeight:800,color:plan.c}}>${plan.finalPrice.toLocaleString("es-AR")}</span>
-            </div>
-            <div style={{display:"flex",justifyContent:"space-between",fontSize:12,color:"#78716C"}}>
-              <span>Facturación {plan.billing==="annual"?"anual":"mensual"}</span>
-              <span>/{plan.finalPeriod}</span>
-            </div>
-            {plan.billing==="annual"&&(
-              <div style={{marginTop:8,padding:"6px 10px",background:"#05966910",borderRadius:8,fontSize:11,color:"#059669",fontWeight:700,textAlign:"center"}}>
-                Ahorro del 20% con plan anual
-              </div>
-            )}
-          </div>
-
-          {/* Card form */}
-          <div style={{display:"flex",flexDirection:"column",gap:10}}>
-            <div>
-              <label style={{fontSize:11,fontWeight:700,color:"#78716C",marginBottom:4,display:"block"}}>NÚMERO DE TARJETA</label>
-              <div style={{position:"relative"}}>
-                <input 
-                  placeholder="4242 4242 4242 4242" 
-                  value={card.number} 
-                  onChange={e=>{ setCard(p=>({...p,number:formatCardNumber(e.target.value)})); setErrors(p=>({...p,number:undefined})); }}
-                  style={{borderColor:errors.number?"#DC2626":undefined,paddingRight:60}}
-                  maxLength={19}
-                />
-                {cardBrand.brand && (
-                  <span style={{position:"absolute",right:12,top:"50%",transform:"translateY(-50%)",fontSize:11,fontWeight:800,color:cardBrand.color,letterSpacing:".05em"}}>{cardBrand.brand}</span>
-                )}
-              </div>
-              {errors.number&&<div style={{fontSize:10,color:"#DC2626",marginTop:2,fontWeight:600}}>{errors.number}</div>}
-            </div>
-
-            <div>
-              <label style={{fontSize:11,fontWeight:700,color:"#78716C",marginBottom:4,display:"block"}}>TITULAR</label>
-              <input placeholder="Nombre como aparece en la tarjeta" value={card.name} onChange={e=>{setCard(p=>({...p,name:e.target.value}));setErrors(p=>({...p,name:undefined}));}} style={{borderColor:errors.name?"#DC2626":undefined}}/>
-              {errors.name&&<div style={{fontSize:10,color:"#DC2626",marginTop:2,fontWeight:600}}>{errors.name}</div>}
-            </div>
-
-            <div style={{display:"flex",gap:10}}>
-              <div style={{flex:1}}>
-                <label style={{fontSize:11,fontWeight:700,color:"#78716C",marginBottom:4,display:"block"}}>VENCIMIENTO</label>
-                <input placeholder="MM/AA" value={card.expiry} onChange={e=>{setCard(p=>({...p,expiry:formatExpiry(e.target.value)}));setErrors(p=>({...p,expiry:undefined}));}} style={{borderColor:errors.expiry?"#DC2626":undefined}} maxLength={5}/>
-                {errors.expiry&&<div style={{fontSize:10,color:"#DC2626",marginTop:2,fontWeight:600}}>{errors.expiry}</div>}
-              </div>
-              <div style={{flex:1}}>
-                <label style={{fontSize:11,fontWeight:700,color:"#78716C",marginBottom:4,display:"block"}}>CVC</label>
-                <input placeholder="123" type="password" value={card.cvc} onChange={e=>{setCard(p=>({...p,cvc:e.target.value.replace(/\D/g,"").slice(0,4)}));setErrors(p=>({...p,cvc:undefined}));}} style={{borderColor:errors.cvc?"#DC2626":undefined}} maxLength={4}/>
-                {errors.cvc&&<div style={{fontSize:10,color:"#DC2626",marginTop:2,fontWeight:600}}>{errors.cvc}</div>}
-              </div>
-            </div>
-
-            <button className="bp" style={{width:"100%",justifyContent:"center",marginTop:6,padding:"14px 24px"}} onClick={handlePay}>
-              <$.Shield s={15}/> Pagar ${plan.finalPrice.toLocaleString("es-AR")}
-            </button>
-
-            <div style={{display:"flex",justifyContent:"center",gap:12,marginTop:4}}>
-              {["Visa","Mastercard","Amex"].map(b=>(
-                <span key={b} style={{fontSize:10,fontWeight:700,color:"#D6D3D1",padding:"2px 8px",border:"1px solid #E7E5E4",borderRadius:6}}>{b}</span>
-              ))}
-            </div>
-
-            <p style={{fontSize:10,color:"#D6D3D1",textAlign:"center",marginTop:2}}>
-              Pago procesado de forma segura. Podés cancelar en cualquier momento.
-            </p>
-          </div>
-        </>
-      )}
-
-      {/* Processing animation */}
-      {step === 3 && processing && (
-        <div style={{textAlign:"center",padding:"40px 16px"}}>
-          <div style={{width:56,height:56,margin:"0 auto 16px",border:"3px solid #E8590C",borderTopColor:"transparent",borderRadius:"50%",animation:"spin .7s linear infinite"}}/>
-          <h3 style={{fontSize:18,fontWeight:800,letterSpacing:"-.03em",marginBottom:6}}>Procesando pago...</h3>
-          <p style={{fontSize:13,color:"#A8A29E"}}>Verificando datos de la tarjeta</p>
-          <div style={{display:"flex",justifyContent:"center",gap:4,marginTop:16}}>
-            {[0,1,2].map(i=>(
-              <div key={i} style={{width:8,height:8,borderRadius:4,background:"#E8590C",opacity:.3+i*.3,animation:`pulse .8s ${i*.2}s infinite`}}/>
-            ))}
-          </div>
+      {/* Order summary */}
+      <div style={{background:"#FAFAF9",borderRadius:14,padding:14,marginBottom:18}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#A8A29E",letterSpacing:".05em",marginBottom:8}}>RESUMEN DEL PLAN</div>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
+          <span style={{fontSize:14,fontWeight:600}}>PetFinder {plan.n}</span>
+          <span style={{fontSize:18,fontWeight:800,color:plan.c}}>US${plan.finalPrice}</span>
         </div>
-      )}
+        <div style={{display:"flex",justifyContent:"space-between",fontSize:11,color:"#78716C"}}>
+          <span>Facturación por {plan.finalPeriod}</span>
+          <span>Cancelás cuando quieras</span>
+        </div>
+      </div>
+
+      {/* Payment method selector */}
+      <div style={{fontSize:11,fontWeight:700,color:"#A8A29E",letterSpacing:".06em",marginBottom:10}}>ELEGÍ CÓMO PAGAR</div>
+      <div style={{display:"flex",flexDirection:"column",gap:8,marginBottom:18}}>
+
+        {/* MercadoPago */}
+        <div
+          onClick={()=>setMethod(method==="mp"?null:"mp")}
+          style={{
+            border:`2px solid ${method==="mp"?"#009EE3":"#E7E5E4"}`,
+            borderRadius:12,padding:"12px 14px",cursor:"pointer",
+            background:method==="mp"?"#009EE308":"#fff",transition:"all .2s",
+          }}
+        >
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontSize:22}}>💙</span>
+            <div>
+              <div style={{fontWeight:700,fontSize:13,color:"#009EE3"}}>MercadoPago</div>
+              <div style={{fontSize:11,color:"#78716C"}}>Pagá en pesos argentinos (AR$) · Cuotas sin interés</div>
+            </div>
+            <div style={{marginLeft:"auto",width:20,height:20,borderRadius:10,border:`2px solid ${method==="mp"?"#009EE3":"#D6D3D1"}`,background:method==="mp"?"#009EE3":"transparent",display:"flex",alignItems:"center",justifyContent:"center"}}>
+              {method==="mp"&&<$.Check s={11} c="#fff"/>}
+            </div>
+          </div>
+          {method==="mp"&&(
+            <div style={{marginTop:12,animation:"fadeIn .2s"}}>
+              <button
+                className="bp"
+                style={{width:"100%",justifyContent:"center",padding:"13px",fontSize:14,background:"#009EE3",borderRadius:10}}
+                onClick={async(e)=>{
+                  e.stopPropagation();
+                  // TODO: Reemplazar con tu MP_PAYMENT_LINK real
+                  // Ejemplo: window.open("https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_PREFERENCE_ID","_blank");
+                  await processPayment("mercadopago");
+                }}
+              >
+                💙 Pagar con MercadoPago · AR${Math.round(plan.finalPrice*1000)}
+              </button>
+              <div style={{fontSize:10,color:"#A8A29E",marginTop:6,textAlign:"center"}}>
+                Te redirige a MercadoPago · Pago 100% seguro
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Tarjeta / Stripe */}
+        <div
+          onClick={()=>setMethod(method==="stripe"?null:"stripe")}
+          style={{
+            border:`2px solid ${method==="stripe"?"#635BFF":"#E7E5E4"}`,
+            borderRadius:12,padding:"12px 14px",cursor:"pointer",
+            background:method==="stripe"?"#635BFF08":"#fff",transition:"all .2s",
+          }}
+        >
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontSize:22}}>💜</span>
+            <div>
+              <div style={{fontWeight:700,fontSize:13,color:"#635BFF"}}>Tarjeta / Stripe (USD)</div>
+              <div style={{fontSize:11,color:"#78716C"}}>Visa, Mastercard, Amex · Pago internacional en dólares</div>
+            </div>
+            <div style={{marginLeft:"auto",width:20,height:20,borderRadius:10,border:`2px solid ${method==="stripe"?"#635BFF":"#D6D3D1"}`,background:method==="stripe"?"#635BFF":"transparent",display:"flex",alignItems:"center",justifyContent:"center"}}>
+              {method==="stripe"&&<$.Check s={11} c="#fff"/>}
+            </div>
+          </div>
+          {method==="stripe"&&(
+            <div style={{marginTop:12,animation:"fadeIn .2s"}}>
+              {/* Card form */}
+              <div style={{display:"flex",flexDirection:"column",gap:8,marginBottom:10}}>
+                <div>
+                  <label style={{fontSize:10,fontWeight:700,color:"#78716C",marginBottom:3,display:"block"}}>NÚMERO DE TARJETA</label>
+                  <div style={{position:"relative"}}>
+                    <input placeholder="4242 4242 4242 4242" value={card.number}
+                      onChange={e=>{setCard(p=>({...p,number:formatCardNumber(e.target.value)}));setErrors(p=>({...p,number:undefined}));}}
+                      style={{borderColor:errors.number?"#DC2626":undefined,paddingRight:55}} maxLength={19}/>
+                    {brand.b&&<span style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",fontSize:10,fontWeight:800,color:brand.c}}>{brand.b}</span>}
+                  </div>
+                  {errors.number&&<div style={{fontSize:10,color:"#DC2626",marginTop:2}}>{errors.number}</div>}
+                </div>
+                <div>
+                  <label style={{fontSize:10,fontWeight:700,color:"#78716C",marginBottom:3,display:"block"}}>TITULAR</label>
+                  <input placeholder="Nombre en la tarjeta" value={card.name}
+                    onChange={e=>{setCard(p=>({...p,name:e.target.value}));setErrors(p=>({...p,name:undefined}));}}
+                    style={{borderColor:errors.name?"#DC2626":undefined}}/>
+                  {errors.name&&<div style={{fontSize:10,color:"#DC2626",marginTop:2}}>{errors.name}</div>}
+                </div>
+                <div style={{display:"flex",gap:8}}>
+                  <div style={{flex:1}}>
+                    <label style={{fontSize:10,fontWeight:700,color:"#78716C",marginBottom:3,display:"block"}}>VENCIMIENTO</label>
+                    <input placeholder="MM/AA" value={card.expiry}
+                      onChange={e=>{setCard(p=>({...p,expiry:formatExpiry(e.target.value)}));setErrors(p=>({...p,expiry:undefined}));}}
+                      style={{borderColor:errors.expiry?"#DC2626":undefined}} maxLength={5}/>
+                    {errors.expiry&&<div style={{fontSize:10,color:"#DC2626",marginTop:2}}>{errors.expiry}</div>}
+                  </div>
+                  <div style={{flex:1}}>
+                    <label style={{fontSize:10,fontWeight:700,color:"#78716C",marginBottom:3,display:"block"}}>CVC</label>
+                    <input placeholder="123" type="password" value={card.cvc}
+                      onChange={e=>{setCard(p=>({...p,cvc:e.target.value.replace(/\D/g,"").slice(0,4)}));setErrors(p=>({...p,cvc:undefined}));}}
+                      style={{borderColor:errors.cvc?"#DC2626":undefined}} maxLength={4}/>
+                    {errors.cvc&&<div style={{fontSize:10,color:"#DC2626",marginTop:2}}>{errors.cvc}</div>}
+                  </div>
+                </div>
+              </div>
+              <button
+                className="bp"
+                style={{width:"100%",justifyContent:"center",padding:"13px",fontSize:14,background:"#635BFF",borderRadius:10}}
+                onClick={async(e)=>{e.stopPropagation();if(validate())await processPayment("card");}}
+              >
+                <$.Shield s={14}/> Pagar US${plan.finalPrice} con tarjeta
+              </button>
+              <div style={{display:"flex",justifyContent:"center",gap:8,marginTop:8}}>
+                {["Visa","Mastercard","Amex"].map(b=><span key={b} style={{fontSize:9,fontWeight:700,color:"#D6D3D1",padding:"2px 6px",border:"1px solid #E7E5E4",borderRadius:4}}>{b}</span>)}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Transferencia bancaria */}
+        <div
+          onClick={()=>setMethod(method==="transfer"?null:"transfer")}
+          style={{
+            border:`2px solid ${method==="transfer"?"#059669":"#E7E5E4"}`,
+            borderRadius:12,padding:"12px 14px",cursor:"pointer",
+            background:method==="transfer"?"#05966908":"#fff",transition:"all .2s",
+          }}
+        >
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontSize:22}}>🏦</span>
+            <div>
+              <div style={{fontWeight:700,fontSize:13,color:"#059669"}}>Transferencia bancaria</div>
+              <div style={{fontSize:11,color:"#78716C"}}>CVU / CBU · Activación en 24hs hábiles</div>
+            </div>
+            <div style={{marginLeft:"auto",width:20,height:20,borderRadius:10,border:`2px solid ${method==="transfer"?"#059669":"#D6D3D1"}`,background:method==="transfer"?"#059669":"transparent",display:"flex",alignItems:"center",justifyContent:"center"}}>
+              {method==="transfer"&&<$.Check s={11} c="#fff"/>}
+            </div>
+          </div>
+          {method==="transfer"&&(
+            <div style={{marginTop:12,animation:"fadeIn .2s"}}>
+              <div style={{background:"#F0FDF4",border:"1px solid #BBF7D0",borderRadius:10,padding:12,marginBottom:10}}>
+                <div style={{fontSize:10,fontWeight:700,color:"#059669",marginBottom:6}}>DATOS PARA TRANSFERIR</div>
+                {[
+                  {l:"Alias",v:"PETFINDER.AI"},
+                  {l:"CVU",v:"0000003100097748312917"},
+                  {l:"Titular",v:"PetFinder AI SRL"},
+                  {l:"CUIL",v:"30-71234567-8"},
+                  {l:"Monto",v:`AR$${Math.round(plan.finalPrice*1000)} / US$${plan.finalPrice}`},
+                ].map((d,i)=>(
+                  <div key={i} style={{display:"flex",justifyContent:"space-between",fontSize:11,marginBottom:3}}>
+                    <span style={{color:"#78716C",fontWeight:600}}>{d.l}</span>
+                    <span style={{fontWeight:700,color:"#1C1917"}}>{d.v}</span>
+                  </div>
+                ))}
+              </div>
+              <button
+                className="bp"
+                style={{width:"100%",justifyContent:"center",padding:"13px",fontSize:13,background:"#059669",borderRadius:10}}
+                onClick={async(e)=>{
+                  e.stopPropagation();
+                  // TODO: Reemplazar con tu email real de soporte
+                  await processPayment("transferencia");
+                }}
+              >
+                ✓ Ya transferí — Activar mi plan
+              </button>
+              <div style={{fontSize:10,color:"#A8A29E",marginTop:6,textAlign:"center"}}>
+                Mandá el comprobante a pagos@petfinderai.com y activamos en 24hs
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* WhatsApp para dudas */}
+        <a
+          href={`https://wa.me/5491155551234?text=Hola%20PetFinder%20AI%2C%20quiero%20activar%20el%20plan%20${encodeURIComponent(plan.n)}`}
+          target="_blank" rel="noopener noreferrer"
+          style={{display:"flex",alignItems:"center",gap:10,background:"#25D36608",border:"1px solid #25D36630",borderRadius:12,padding:"12px 14px",textDecoration:"none",cursor:"pointer"}}
+        >
+          <span style={{fontSize:22}}>💬</span>
+          <div>
+            <div style={{fontWeight:700,fontSize:12,color:"#128C7E"}}>¿Preferís coordinar por WhatsApp?</div>
+            <div style={{fontSize:11,color:"#78716C"}}>Te ayudamos a activar tu plan por chat</div>
+          </div>
+          <$.Arr s={14} c="#25D366" style={{marginLeft:"auto"}}/>
+        </a>
+      </div>
+
+      <p style={{fontSize:10,color:"#D6D3D1",textAlign:"center"}}>
+        <$.Shield s={11} c="#D6D3D1"/> Pago seguro · Cancelás cuando quieras · Sin permanencia
+      </p>
     </div>
   );
 }
